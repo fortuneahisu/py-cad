@@ -1,0 +1,226 @@
+body {
+    font-family: Bahnschrift light;
+    font-size: 125%;
+    font-weight: lighter;
+    line-height: 1.5;
+    margin: 0px;
+    height: 100vh;
+}
+
+h1 {
+    border-radius: 3rem;
+    position: relative;
+    font-weight: 1000;
+    font-family: Segoe UI;
+    font-size: 300%;
+    text-align: center;
+    padding: 2rem 2rem 2rem 2rem;
+}
+
+h3 {
+    font-size: 78.125%;
+    font-weight: lighter;
+    text-align: center;
+    padding: 3.75px;
+    margin: 3.75px;
+}
+
+h4 {
+    font-size: 87.5%;
+    text-align: center;
+    font-weight: lighter;
+    padding: 5px;
+    margin: 1px;
+    background: rgb(177, 177, 177);
+    color: rgb(0, 0, 0);
+    border-radius: 3rem;
+}
+
+#Home {
+    font-size: 150%;
+    text-align: center;
+    background: black;
+    color: white;
+}
+
+#Projects {
+    font-size: 112.5%;
+    text-align: center;
+    background: black;
+    color: white;
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    height: 1px;
+    opacity: 0.2;
+    padding: 2rem 0px 2rem 0px;
+    background: black;
+    transition: 0.3s;
+    border-bottom-right-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translateY(-105px);
+    }
+
+    50% {
+        transform: translateY(-110px);
+    }
+
+    100% {
+        transform: translateY(-105px);
+    }
+}
+
+.nav_items {
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    top: 0;
+    height: 1px;
+    list-style-type: none;
+    opacity: 0;
+    transition: 0.3s;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.nav_items li {
+    padding: 0.25rem;
+    transition: 0.3s;
+    background: grey;
+    box-shadow: 1px 1px 2.5px 2px darkgrey;
+    border-top-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+}
+
+.nav_items li a {
+    padding: 0.5rem 2.5rem;
+    color: white;
+    text-decoration: none;
+}
+
+nav:hover .nav_items {
+    opacity: 1;
+    height: 38px;
+    font-size: 100;
+}
+
+nav:hover {
+    opacity: 1;
+    height: 37.5px;
+}
+
+.nav_items li:hover {
+    border-radius: 1rem;
+}
+
+#title {
+    font-size: 300%;
+    position: relative;
+    font-weight: 1000;
+    font-family: Segoe UI;
+    text-align: center;
+    padding: 2rem 1rem 2rem 1rem;
+    margin: 100px 15% 20px 15%;
+    border-radius: 3rem;
+    box-shadow: 0px 0px 10px 1px lightgrey;
+}
+
+#title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    width: 10%;
+    height: 7.5px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 2rem;
+}
+
+#introductory {
+    margin: 50px 15% 20px 15%;
+    font-family: Bahnschrift light;
+    line-height: 1.75;
+}
+
+#About {
+    margin: 20px 15% 20px 15%;
+    border-radius: 3rem;
+    box-shadow: 0px 0px 10px 1px lightgrey;
+}
+
+.about_title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.about_title img {
+    height: 175px;
+    width: 137.5px;
+    position: center;
+    border-radius: 2rem;
+    margin: 1rem;
+    align-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 1px 1px lightgrey;
+}
+
+#about_the_creator {
+    align-content: center;
+    position: relative;
+    margin: 20px 0px 20px 0px;
+    padding: 2rem;
+}
+
+#about_the_creator::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    width: 10%;
+    height: 7.5px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 2rem;
+}
+
+.about_me {
+    border-radius: 3rem;
+    box-shadow: inset 0px 0px 10px 1px lightgrey;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.about {
+    width: 25%;
+    float: left;
+    margin: 1rem;
+}
+
+#description {
+    font-family: Bahnschrift light;
+    font-size: 1.125rem;
+    line-height: 1.75;
+}
+
+footer {
+    text-align: center;
+    border-top-left-radius: 3rem;
+    border-top-right-radius: 3rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: lightgrey;
+}
