@@ -6,55 +6,9 @@ __Module and function training__
 import random
 import time
 from random import randint
-import cmath
+from basic_modules import print_title
 
 
-def print_title(title):
-    """
-    Prints titles
-    """
-    print('_' * len(title))
-    print(title)
-    print('_' * len(title))
-
-
-def quadratic_equation(a, b, c):
-    """
-    Solves quadratic equations
-    """
-    try:
-        ά = 0
-        β = 0
-        determinant = b ** 2 - (4 * a * c)
-        if determinant >= 0:
-            ά = (-b + determinant ** 0.5) / (2 * a)
-            β = (-b - determinant ** 0.5) / (2 * a)
-            return f'{ά} and {β}'
-        ά = (-b + (cmath.sqrt(determinant))) / (2 * a)
-        β = (-b - (cmath.sqrt(determinant))) / (2 * a)
-        return f'{ά} and {β}'
-    except ZeroDivisionError:
-        return 'Cannot divide by zero'
-    except ValueError:
-        return 'Input valid values'
-    except TypeError:
-        return 'Input integers or floats'
-
-
-def square_limit_finder(limit:int, step:int = 1):
-    """
-    Finds the highest numbers having
-    its square between 0 and the limit
-    """
-    iteration = 0
-    try:
-        while iteration ** 2 <= limit:
-            iteration += step
-        return iteration -1
-    except ValueError:
-        return 'Re-enter values to be used'
-    except TypeError:
-        return 'Inappropriate value type'
 
 
 def test_questions():
@@ -220,45 +174,7 @@ def palindrome_checker(word: str):
     return 'Well, NOT a palindrome'
 
 
-def factorial(number: int):
-    """
-    Find the factorial of a number
-    """
-    iteration = 1
-    number_factorial = number
-    while iteration < number:
-        number_factorial *= number - iteration
-        iteration += 1
-    return number_factorial
 
 
-def calculate():
-    """
-    Calculator for +, -, *, / operations
-    """
-    num1 = float(input('num1: '))
-    while True:
-        try:
-            operation = input('operation: ')
-            if operation == 'quit':
-                break
-            num2 = float(input('num2: '))
-            if operation == '+':
-                num1 = num1 + num2
-                continue
-            if operation == '-':
-                num1 = num1 - num2
-                continue
-            if operation == '/':
-                num1 = num1 / num2
-                continue
-            if operation == '*':
-                num1 = num1 * num2
-                continue
-        except ZeroDivisionError:
-            return 'Error: Division by zero'
-        except ValueError:
-            return 'Error: Invalid input'
-    return num1
 
 #if __name__ == "__main__":
