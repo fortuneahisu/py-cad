@@ -1,3 +1,6 @@
+"""
+Practice on matplotlib integrated with numpy
+"""
 import numpy as np
 import matplotlib . pyplot as plt
 

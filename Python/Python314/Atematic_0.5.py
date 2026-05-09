@@ -5,22 +5,32 @@ import numpy as np
 import matplotlib.pyplot as plt
 while True:
     try:
-        angle = float(input('θ: '))
-        u = float(input('init_velocity: '))
-        g = float(input('acel_due_to_gravity: '))
+        radians = float(input('angle(degree): '))
+        velocity = float(input('velocity: '))
+        acceleration = float(input('acceleration: '))
         break
     except ValueError:
-        print('angle;init_velocity;acel_due_to_gravity===int;float!')
+        print('All the concerned variables are either integers or floats')
         continue
-theta = np.pi * angle / 180
-maximum_height = u ** 2 * (np.sin(theta) ** 2) / (2 * g)
-total_time = (2 * u * np.sin(theta)) / g
-distance = u ** 2 * np.sin(2 * theta) / g
-t = np.linspace(0, total_time, 100)
-x = u * np.cos(theta) * t
-y = ((u * np.sin(theta) * t) - (0.5 * (g * (t ** 2))))
+
+angle = radians * np.pi / 180
+
+maximum_height = velocity ** 2 * (np.sin(angle) ** 2) / (2 * acceleration)
+
+total_time = (2 * velocity * np.sin(angle)) / acceleration
+
+distance = (velocity ** 2) * np.sin(2 * angle) / acceleration
+
+time_stamp = np.linspace(0, total_time, 100)
+
+range = abs(velocity * np.cos(angle) * time_stamp)
+
+height = (velocity  * np.sin(angle) * time_stamp) - (0.5 * acceleration * time_stamp ** 2)
+
 print(f'maximum height = {maximum_height:.3f} metres')
 print(f'time taken = {total_time:.3f} seconds')
 print(f'range = {distance:.3f} metres')
-plt.plot(x,y)
+
+plt.plot(range, height)
+plt.grid()
 plt.show()

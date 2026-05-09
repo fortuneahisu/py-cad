@@ -1,7 +1,8 @@
 """
-Motion simulation project
+This attempts to simulate positions vectorially
 """
 from math import sin, cos
+import math
 import cmath
 import numpy as np
 
@@ -9,7 +10,7 @@ def motion_simulator():
     """
     Motion physics simulator
     """
-    pi = 3.1415926535897932384626433832795
+    pi = 3.141592653589793228841971693993114819665930005738          #unnecessary precision to the 48th decimal
     position = np.array([0.0, 0.0])
     step_length = np.array([1.0, 1.0])
     velocity = np.array([0, 0])
@@ -39,10 +40,5 @@ def motion_simulator():
             print('Nope')
         except TypeError:
             print('Nope')
-
-
-
-
-
-
-motion_simulator()
+        except AttributeError:
+            print('Nope')

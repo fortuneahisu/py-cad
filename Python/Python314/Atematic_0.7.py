@@ -1,4 +1,5 @@
 """
+Relationship between functions
 Hospital game
 """
 import time

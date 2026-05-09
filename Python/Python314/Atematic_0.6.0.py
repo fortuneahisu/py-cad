@@ -1,4 +1,5 @@
-"""Motion simulator"""
+"""Outdated(As of 9/5/2026)
+Motion simulator"""
 from math import sin, cos, pi
 
 step = 0          # basic unit

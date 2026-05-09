@@ -1,5 +1,5 @@
 """
-Current-time model for Lithium-ion batteries
+voltage-time model for Lithium-ion batteries
 """
 import numpy as np
 import matplotlib.pyplot as plt

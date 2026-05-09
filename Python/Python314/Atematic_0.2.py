@@ -1,5 +1,6 @@
 """
 Practice on plots and graphs
+A perfect circle
 """
 import numpy as np
 import matplotlib.pyplot as plt
