@@ -2,34 +2,35 @@
 Motion simulation project
 """
 from math import sin, cos, pi
-
+import cmath
 
 def motion_simulator():
     """
     Motion physics simulator
     """
-    step = 0
-    angle = 0
-    radians = angle/180 * pi              # in degrees
-    x = 0                                 # basic dimensioning
-    y = 0                                 # basic dimensioning
     while True:
-        control = input('Enter W, A, S, D to move').lower()
+        position = np.array([0.0, 0.0])
+        dt = np.array([0.001, 0.001])
+        step = np.array([0.0, 0.0])
+        turn_angle = 1
+        angle = 0
+        radians = angle/180 * pi
+        control = input('Control: ').lower()
         if control == 'w':
-            step += 5
-        elif control == 'a':
-            angle -= 5
-        elif control == 'd':
-            angle += 5
+            step += dt
         elif control == 's':
-            step -= 5
+            step -= dt
+        elif control == 'a':
+            angle -= turn_angle
+        elif control == 'd':
+            angle += turn_angle
         else:
             print('Huh, 😕')
-            continue
-        velocity_x = sin(radians) * step
-        velocity_y = cos(radians) * step
         if angle >= 360 or angle <= -360:
             angle = 0
+        velocity_x = sin(radians) * step
+        velocity_y = cos(radians) * step
+        velocity = cmath.sqrt(velocity_x ** 2 + velocity_y ** 2)
         x += velocity_x
         y += velocity_y
         print(x)
@@ -40,6 +41,9 @@ def motion_simulator():
         print(step)
         print(velocity_x)
         print(velocity_y)
+
+
+
 
 
 
