@@ -25,7 +25,7 @@ distance = (velocity**2) * np.sin(2 * angle) / acceleration
 
 time_stamp = np.linspace(0, total_time, 100)
 
-range = abs(velocity * np.cos(angle) * time_stamp)
+horizontal_dist = abs(velocity * np.cos(angle) * time_stamp)
 
 height = (velocity * np.sin(angle) * time_stamp) - (0.5 * acceleration * time_stamp**2)
 
@@ -33,6 +33,6 @@ print(f"maximum height = {maximum_height:.3f} metres")
 print(f"time taken = {total_time:.3f} seconds")
 print(f"range = {distance:.3f} metres")
 
-plt.plot(range, height)
+plt.plot(horizontal_dist, height)
 plt.grid()
 plt.show()

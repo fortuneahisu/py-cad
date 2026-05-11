@@ -1,4 +1,5 @@
 """Module responsible for tracking my progress after August 17th"""
+
 import datetime
 import os
 
@@ -7,6 +8,7 @@ FILE = "progress_log.txt"
 weekday = date.strftime("%A")
 subject = 0
 status = 0
+content = "Printed content for assertion"
 subject_status = {}
 subjects = {
     "Monday": ("Maths", "Physics"),
@@ -22,12 +24,12 @@ subjects = {
 def write_to_file(mode):
     """Writing to file"""
     with open(FILE, mode) as log:
-        log.write(f"{'-' * 100}\n")
+        log.write(f"{'-' * 50}\n")
         log.write(f"{date}\n")
-        log.write(f"{'-' * 100}\n")
-        for item in subject_status.items():
+        log.write(f"{'-' * 50}\n")
+        for item in subject_status:
             log.write(f"-> {item} | [{subject_status[item]}]\n")
-        log.write(f"{'-' * 100}\n")
+        log.write(f"{'-' * 50}\n")
 
 
 for day in subjects:
@@ -37,11 +39,11 @@ for day in subjects:
             while True:
                 try:
                     status = input("Status: ")
-                    if status.lower() == "true":
+                    if status.lower() in ["true", "done", "yes", "y"]:
                         status = "Done"
                         subject_status[subject] = status
                         break
-                    elif status.lower() == "false":
+                    elif status.lower() in ["false", "undone", "no", "n"]:
                         status = "Pending indefinitely..."
                         subject_status[subject] = status
                         break
@@ -54,7 +56,6 @@ for day in subjects:
 if os.path.exists(FILE):
     try:
         write_to_file("a")
-
     except Exception as e:
         print(f"{e} occured")
 else:
@@ -63,4 +64,9 @@ else:
     except Exception as e:
         print(f"{e} occured")
 
-print("Content appended to progress_log.txt")
+for item in subject_status:
+    content = f"-> {item} | [{subject_status[item]}]"
+    print("-" * len(content))
+    print(content)
+print("-" * len(content))
+print("\nContent appended to progress_log.txt")
