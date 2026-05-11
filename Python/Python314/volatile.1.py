@@ -1,7 +1,8 @@
 """This code simulates the projectile motion of an object under the influence of gravity.
 It calculates the trajectory of the object and plots it using Matplotlib."""
-import numpy as np
+
 import matplotlib.pyplot as plt
+import numpy as np
 
 GRAVITY = np.array([0.0, -9.81])
 DT = 0.001
@@ -11,16 +12,12 @@ SPEED = 45
 
 position = np.array([0.0, 0.0])
 
-velocity = np.array([
-    SPEED * np.cos(angle),
-    SPEED * np.sin(angle)
-])
+velocity = np.array([SPEED * np.cos(angle), SPEED * np.sin(angle)])
 
 x_points = []
 y_points = []
 
 while position[1] >= 0:
-
     x_points.append(position[0])
     y_points.append(position[1])
 

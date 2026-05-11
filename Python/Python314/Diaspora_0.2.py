@@ -17,13 +17,12 @@ def load_todos():
         try:
             with open(TODO_FILE, "r") as file:
                 for line in file:
-                    parts = line.strip().split('|')
+                    parts = line.strip().split("|")
                     if len(parts) == 2:
                         task_desc = parts[0]
                         # Convert 'True'/'False' string to boolean
-                        completed_status = (parts[1].lower() == 'true')
-                        todos.append(
-                            {"task": task_desc, "completed": completed_status})
+                        completed_status = parts[1].lower() == "true"
+                        todos.append({"task": task_desc, "completed": completed_status})
             print(f"Loaded {len(todos)} tasks from {TODO_FILE}.")
         except Exception as e:
             print(f"Error loading tasks: {e}")
@@ -74,8 +73,7 @@ def mark_task_complete():
         return  # Exit if no tasks to mark
 
     try:
-        task_number = int(
-            input("Enter the number of the task to mark as complete: "))
+        task_number = int(input("Enter the number of the task to mark as complete: "))
         # Adjust for 0-based indexing
         task_index = task_number - 1
 
@@ -123,6 +121,7 @@ def display_menu():
     print("5. Exit")
     print("-----------------------")
 
+
 # --- Main Application Loop ---
 
 
@@ -134,15 +133,15 @@ def main():
         display_menu()
         choice = input("Enter your choice (1-5): ")
 
-        if choice == '1':
+        if choice == "1":
             add_task()
-        elif choice == '2':
+        elif choice == "2":
             view_tasks()
-        elif choice == '3':
+        elif choice == "3":
             mark_task_complete()
-        elif choice == '4':
+        elif choice == "4":
             delete_task()
-        elif choice == '5':
+        elif choice == "5":
             print("Exiting To-Do List. Goodbye!")
             break  # Exit the while loop
         else:
