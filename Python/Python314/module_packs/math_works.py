@@ -5,7 +5,7 @@ Custom exhaustive module on mathematical concepts
 import cmath
 
 
-def quadratic_equation(a, b, c):
+def quadratic_equation(a: int, b: int, c: int):
     """
     Solves quadratic equations of ax² + bx + c = 0 format
     """

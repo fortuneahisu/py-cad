@@ -32,41 +32,65 @@ def write_to_file(mode):
         log.write(f"{'-' * 50}\n")
 
 
-for day in subjects:
-    if weekday == day:
-        for subject in subjects[day]:
-            print(subject)
-            while True:
-                try:
-                    status = input("Status: ")
-                    if status.lower() in ["true", "done", "yes", "y"]:
-                        status = "Done"
-                        subject_status[subject] = status
-                        break
-                    elif status.lower() in ["false", "undone", "no", "n"]:
-                        status = "Pending indefinitely..."
-                        subject_status[subject] = status
-                        break
-                    else:
-                        print('"status" is either "true" or "false"')
-                        continue
-                except TypeError:
-                    print('"status" is text (true or false)')
+def check_daily_status(subjects, subject_status):
+    """CHecking if a day's subjects have been studied"""
+    for day in subjects:
+        if weekday == day:
+            for subject in subjects[day]:
+                print(subject)
+                while True:
+                    try:
+                        status = input("Status: ")
+                        if status.lower() in [
+                            "true",
+                            "done",
+                            "yes",
+                            "y",
+                            "fr",
+                            "bet",
+                            "you bet",
+                            "of course",
+                        ]:
+                            status = "Done"
+                            subject_status[subject] = status
+                            break
+                        elif status.lower() in [
+                            "false",
+                            "undone",
+                            "no",
+                            "n",
+                            "nah",
+                            "nay",
+                        ]:
+                            status = "Pending indefinitely..."
+                            subject_status[subject] = status
+                            break
+                        else:
+                            print('"status" is either "true" or "false"')
+                            continue
+                    except TypeError:
+                        print('"status" is text (true or false)')
 
-if os.path.exists(FILE):
-    try:
-        write_to_file("a")
-    except Exception as e:
-        print(f"{e} occured")
-else:
-    try:
-        write_to_file("w")
-    except Exception as e:
-        print(f"{e} occured")
 
-for item in subject_status:
-    content = f"-> {item} | [{subject_status[item]}]"
+def progress_log():
+    check_daily_status(subjects, subject_status)
+    if os.path.exists(FILE):
+        try:
+            write_to_file("a")
+        except Exception as e:
+            print(f"{e} occured")
+    else:
+        try:
+            write_to_file("w")
+        except Exception as e:
+            print(f"{e} occured")
+    for item in subject_status:
+        content = f"-> {item} | [{subject_status[item]}]"
+        print("-" * len(content))
+        print(content)
     print("-" * len(content))
-    print(content)
-print("-" * len(content))
-print("\nContent appended to progress_log.txt")
+    print("\nContent appended to progress_log.txt\n")
+
+
+if __name__ == "__main__":
+    progress_log()

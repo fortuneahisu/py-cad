@@ -8,14 +8,14 @@ import random
 import time
 from random import randint
 
-from basic_modules import print_title
+from module_packs import basic_modules
 
 
 def test_questions():
     """
     Test to measure my knowledge of 'for' loops
     """
-    print_title("Geography test")
+    basic_modules.print_title("Geography test")
     questions = [
         "What continent is Guadalupe found? ",
         "What country borders USA to the north? ",
@@ -174,4 +174,5 @@ def palindrome_checker(word: str):
     return "Well, NOT a palindrome"
 
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
+    print(test_questions())
