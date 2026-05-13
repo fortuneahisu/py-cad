@@ -1,4 +1,4 @@
-"""Module responsible for tracking my progress after August 17th"""
+"""Module responsible for tracking my study progress after August 17th"""
 
 import datetime
 import os
@@ -10,6 +10,49 @@ subject = 0
 status = 0
 content = "Printed content for assertion"
 subject_status = {}
+agreement = [
+    "yeah",
+    "yes",
+    "y",
+    "it is",
+    "yh",
+    "aight",
+    "well, yes",
+    "would i",
+    "let's go",
+    "lets go",
+    "would i?",
+    "yay",
+    "do it then",
+    "absolutely",
+    "ya",
+    "true",
+    "done",
+    "yes",
+    "y",
+    "fr",
+    "bet",
+    "you bet",
+    "of course",
+]
+disagreement = [
+    "nay",
+    "nah",
+    "no",
+    "n",
+    "hell nah",
+    "hell no",
+    "absolutely not",
+    "why would i",
+    "none",
+    "why would I",
+    "why would I?",
+    "nothing",
+    "nothing here",
+    "false",
+    "undone",
+    "no",
+]
 subjects = {
     "Monday": ("Maths", "Physics"),
     "Tuesday": ("Physics", "Chemistry"),
@@ -33,7 +76,7 @@ def write_to_file(mode):
 
 
 def check_daily_status(subjects, subject_status):
-    """CHecking if a day's subjects have been studied"""
+    """Checking if a day's subjects have been studied"""
     for day in subjects:
         if weekday == day:
             for subject in subjects[day]:
@@ -41,27 +84,11 @@ def check_daily_status(subjects, subject_status):
                 while True:
                     try:
                         status = input("Status: ")
-                        if status.lower() in [
-                            "true",
-                            "done",
-                            "yes",
-                            "y",
-                            "fr",
-                            "bet",
-                            "you bet",
-                            "of course",
-                        ]:
+                        if status.lower() in agreement:
                             status = "Done"
                             subject_status[subject] = status
                             break
-                        elif status.lower() in [
-                            "false",
-                            "undone",
-                            "no",
-                            "n",
-                            "nah",
-                            "nay",
-                        ]:
+                        elif status.lower() in disagreement:
                             status = "Pending indefinitely..."
                             subject_status[subject] = status
                             break

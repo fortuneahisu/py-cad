@@ -4,6 +4,25 @@ Custom exhaustive module on mathematical concepts
 
 import cmath
 
+disagreement = [
+    "nay",
+    "nah",
+    "no",
+    "quit",
+    "break",
+    "n",
+    "hell nah",
+    "hell no",
+    "absolutely not",
+    "why would i",
+    "none",
+    "why would I",
+    "why would I?",
+    "nothing",
+    "nothing here",
+    "="
+]
+
 
 def quadratic_equation(a: int, b: int, c: int):
     """
@@ -84,7 +103,7 @@ def calculate():
     while True:
         try:
             operation = input("operation: ")
-            if operation == "quit":
+            if operation in disagreement:
                 break
             number_2 = float(input("number_2: "))
             if operation == "+":
