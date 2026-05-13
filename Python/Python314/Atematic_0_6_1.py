@@ -47,7 +47,6 @@ def motion_simulator():
                     angle -= turn_angle
                     x_path.append(position[0])
                     y_path.append(position[1])
-                
         except ValueError:
             print("Nope, ValueError")
         except AttributeError:
@@ -55,6 +54,7 @@ def motion_simulator():
     travel_path(x_path, y_path)
 
 def travel_path(x_path, y_path):
+    """Trace the path of the player"""
     color = random.choice(["red", "blue", "green", "pink", "black"])
     ax.plot(x_path, y_path, color=color, label="Travel path")
     ax.set_aspect("equal")

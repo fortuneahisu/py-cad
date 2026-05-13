@@ -64,6 +64,7 @@ subjects = {
 }
 
 
+
 def write_to_file(mode):
     """Writing to file"""
     with open(FILE, mode) as log:
@@ -83,12 +84,12 @@ def check_daily_status(subjects, subject_status):
                 print(subject)
                 while True:
                     try:
-                        status = input("Status: ")
-                        if status.lower() in agreement:
+                        status = input("Status: ").lower().strip()
+                        if status in agreement:
                             status = "Done"
                             subject_status[subject] = status
                             break
-                        elif status.lower() in disagreement:
+                        if status in disagreement:
                             status = "Pending indefinitely..."
                             subject_status[subject] = status
                             break
@@ -97,20 +98,17 @@ def check_daily_status(subjects, subject_status):
                             continue
                     except TypeError:
                         print('"status" is text (true or false)')
+                        break
 
 
 def progress_log():
+    """Main UX interface"""
+    content = []
     check_daily_status(subjects, subject_status)
     if os.path.exists(FILE):
-        try:
-            write_to_file("a")
-        except Exception as e:
-            print(f"{e} occured")
+        write_to_file("a")
     else:
-        try:
-            write_to_file("w")
-        except Exception as e:
-            print(f"{e} occured")
+        write_to_file("w")
     for item in subject_status:
         content = f"-> {item} | [{subject_status[item]}]"
         print("-" * len(content))

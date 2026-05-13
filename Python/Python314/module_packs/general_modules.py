@@ -147,11 +147,11 @@ def rock_paper_scissors():
             or ((pc_choice == "paper") and (user_choice == "rock"))
             or ((pc_choice == "scissors") and (user_choice == "paper"))
         ):
-            print("PC wins")
+            print(f"PC wins this round, {rounds - 10} more rounds to go")
             rounds += 1
             pc_wins += 1
         else:
-            print("You win")
+            print(f"You win this round, {rounds - 10} more rounds to go")
             your_wins += 1
             rounds += 1
     if pc_wins > your_wins:

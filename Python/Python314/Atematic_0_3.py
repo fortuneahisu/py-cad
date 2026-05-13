@@ -10,7 +10,7 @@ from time import sleep
 import progress_log
 from module_packs import general_modules, math_works
 
-my_name = "Declan"
+MY_NAME = "Declan"
 friends = [
     "Oba",
     "Obafemi",
@@ -34,7 +34,7 @@ math_words = [
     "-",
     "/",
 ]
-fun_words = ["joy", "party", "games", "fun", "game"]
+fun_words = ["joy", "party", "games", "fun", "game", "play"]
 study_words = ["study", "read", "learn"]
 climate_words = ["time", "date", "when", "today", "schedule", "weather"]
 complements = ["nice", "lit", "impressive", "smart", "intelligent", "good", "excelent"]
@@ -92,21 +92,32 @@ agreement = [
     "yes",
     "y",
     "fr",
+    "right now",
     "bet",
     "you bet",
     "of course",
+    "hell yeah",
+    "hell yes",
+    "heck yeah",
+    "heck yes",
+    "why not",
+    "why not?",
 ]
 disagreement = [
     "nay",
     "nah",
     "no",
     "n",
+    "not",
     "hell nah",
     "hell no",
     "absolutely not",
     "why would i",
     "none",
     "why would I",
+    "fuck no",
+    "heck nah",
+    "heck no",
     "why would I?",
     "nothing",
     "nothing here",
@@ -116,11 +127,16 @@ disagreement = [
 ]
 small_talk = [
     "Okay, let's continue...",
-    "Easter egg: my creator's name is FortuneTry key words about math, study or games!",
+    "Easter egg: my creator's name is Fortune",
+    "Try key words about math, study, situational stuff or games!",
+    "You might notice I'm ignoring some of you messages, It's that I can't just reply",
+    "Bear with me for my inabilities",
+    "I'm sure it's annoying that I'm not the best",
 ]
 
 
 def introduction():
+    """Last log message from Beta 001"""
     print("\"See, I have had other trials of this before, you're the 002 version!")
     sleep(2)
     print("But they all could do only one thing")
@@ -133,11 +149,12 @@ def introduction():
     sleep(1.5)
     print("\n")
     print(" " * 45 + "-Fortune, your creator")
-    return "\n"
     sleep(2)
+    return "\n"
 
 
-def math_function():
+def math_function(name):
+    """Math knowledge base"""
     affirmation = (
         input(
             "Hey!, I should have a function on calculations, If that's what you want... "
@@ -163,15 +180,15 @@ def math_function():
                     c = int(input("c: "))
                     print(math_works.quadratic_equation(a, b, c))
                     break
-                elif key == 2:
+                if key == 2:
                     number = int(input("number: "))
                     print(math_works.factorial(number))
                     break
-                elif key == 3:
+                if key == 3:
                     print(math_works.calculate())
                     break
             except ValueError:
-                print("Choose from a number damn menu")
+                print("Choose a number from the damn menu")
                 continue
     elif affirmation in disagreement:
         print(f"Anyhow it is, ay {name}? ")
@@ -180,6 +197,7 @@ def math_function():
 
 
 def fun_function(word, name):
+    """Fun knowledge base"""
     affirmation = (
         input(f"Speaking of '{word}', would you like to have some fun? ")
         .lower()
@@ -199,13 +217,13 @@ def fun_function(word, name):
                 if choice == 1:
                     general_modules.test_questions()
                     break
-                elif choice == 2:
+                if choice == 2:
                     general_modules.whatsapp_simulation()
                     break
-                elif choice == 3:
+                if choice == 3:
                     general_modules.rock_paper_scissors()
                     break
-            except TypeError:
+            except ValueError:
                 print("You're meant to choose a value from the menu")
                 continue
     elif affirmation in disagreement:
@@ -215,8 +233,9 @@ def fun_function(word, name):
 
 
 def study_function(name):
+    """Log processor access"""
     print(
-        f"Okay {name}, slow down. I have a function on studying, It's shallow, but It's something"
+        f"Okay {name}, calms. I have a function on studying, It's shallow, but It's something"
     )
     affirmation = input("How'd you like that? ").lower().strip()
     if affirmation in agreement:
@@ -235,6 +254,7 @@ def study_function(name):
 
 
 def climate_function():
+    """Climate information access"""
     affirmation = input(
         "What exactly do you want to know, weather?, time?, another? "
     ).strip()
@@ -246,14 +266,15 @@ def climate_function():
     elif affirmation in ["weather", "hot", "cold", "rain", "rainy", "chill"]:
         print("Guess who's at the other side of the screen?")
         sleep(1)
-        print(f"Look outside instead, I can't do that for now")
+        print("Look outside instead, I can't do that for now")
     elif affirmation in disagreement:
         print("My bad mate")
     else:
         print("I'll assume you mean no")
 
 
-def interface(my_name, friends, i_know, to_you_too):
+def interface():
+    """Main UX interface"""
     # introduction()
     name = input("What's your first name, user? ").capitalize().strip()
     if name == "Fortune":
@@ -262,6 +283,9 @@ def interface(my_name, friends, i_know, to_you_too):
     elif name == "Declan":
         print("That's literally my name too, beep-boop...")
         print("I may just be the dumbest 'AI' you'll encounter")
+    elif name == "Guess":
+        name = random.choice(friends)
+        print(f"Alright, {name} then. (no debate)")
     elif name.lower() in curses:
         print("I doubt it, let's use our brains here shall we?")
         print(f"Anyways, we'll continue with '{name}'")
@@ -272,20 +296,18 @@ def interface(my_name, friends, i_know, to_you_too):
         )
     else:
         print(
-            f"Hey {name}, My name is {my_name}, and I may just be the dumbest AI you'll encounter"
+            f"Hey {name}, My name is {MY_NAME}, and I may just be the dumbest AI you'll encounter"
         )
     sleep(2)
     while True:
-        # print(random.choice(small_talk))
+        print(random.choice(small_talk))
         message = input().lower()
         for word in math_words:
             if word in message:
-                math_function()
-                continue
+                math_function(name)
         for word in fun_words:
             if word in message:
                 fun_function(word, name)
-                continue
         for word in study_words:
             if word in message:
                 study_function(name)
@@ -298,21 +320,7 @@ def interface(my_name, friends, i_know, to_you_too):
         for word in curses:
             if word in message:
                 random.choice(to_you_too)
-        if (
-            word
-            in message
-            not in [
-                math_words,
-                fun_words,
-                study_words,
-                climate_words,
-                complements,
-                curses,
-            ]
-        ):
-            print("I can't help with that for now")
-            print("Try a key word concerning math, study, fun, time or the weather")
 
 
 if __name__ == "__main__":
-    print(interface(my_name, friends, i_know, to_you_too))
+    print(interface())
