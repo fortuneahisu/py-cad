@@ -16,8 +16,7 @@ int main()
     int age = 0;
     char course[40];
     int jambScore = 0;
-    float jambPercent = jambScore/400;
-
+    char institution[40];
     printf("Enter your full name: ");
     scanf(" %s%s", nameFirst, nameLast);
     printf("Hello %s, Input more about yourself to move on.\n", nameLast);
@@ -27,6 +26,7 @@ int main()
     scanf(" %s", course);
     printf("Input your JAMB score: ");
     scanf(" %d", &jambScore);
-    jambPercent = jambScore/400;
-    printf("%s, you are %d and are trying to study %s with %d JAMB score percentage", nameLast, age, course, jambPercent);
+    printf("What institution would you prefer? ");
+    scanf(" %s", &institution);
+    printf("%s, you are %d and are trying to study %s with %d JAMB score at %s", nameLast, age, course, jambScore, institution);
 }

@@ -1,3 +1,10 @@
+/**
+ * File Name: premier_c.c
+ * Author: Ahisu Fortune
+ * Date: 28th of May, 2025
+ * Description: A dictionary of all my 'C' knowledge
+ * Input Status: Required compulsorily
+ */
 #include <stdio.h>
 #include <stdlib.h>
 

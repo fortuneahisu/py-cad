@@ -11,10 +11,10 @@ while True:
         velocity = float(input("velocity: "))
         acceleration = float(input("acceleration: "))
         break
-    except ValueError:
-        print("All the concerned variables are either integers or floats")
+    except ValueError as error:
+        print(error)
         continue
-
+# "All the concerned variables are either integers or floats"
 angle = radians * np.pi / 180
 
 maximum_height = velocity**2 * (np.sin(angle) ** 2) / (2 * acceleration)

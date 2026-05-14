@@ -27,7 +27,7 @@ def motion_simulator():
         try:
             control = input("Control: ").lower()
             if control in ["break", "q", "quit", "stop"]:
-                print(f"Ended at {position} facing {(angle/pi * 180) % 360} degrees")
+                print(f"Ended at {position} facing {(angle / pi * 180) % 360} degrees")
                 break
             for value in control:
                 trig_equalizers = np.array([cos(angle), sin(angle)])
@@ -41,17 +41,14 @@ def motion_simulator():
                     y_path.append(position[1])
                 elif value == "a":
                     angle += turn_angle
-                    x_path.append(position[0])
-                    y_path.append(position[1])
                 elif value == "d":
                     angle -= turn_angle
-                    x_path.append(position[0])
-                    y_path.append(position[1])
-        except ValueError:
-            print("Nope, ValueError")
-        except AttributeError:
-            print("Nope, AttributeError")
+        except ValueError as error:
+            print(error)
+        except AttributeError as error:
+            print(error)
     travel_path(x_path, y_path)
+
 
 def travel_path(x_path, y_path):
     """Trace the path of the player"""
@@ -62,6 +59,7 @@ def travel_path(x_path, y_path):
     plt.legend()
     plt.grid()
     plt.show()
+
 
 if __name__ == "__main__":
     motion_simulator()
