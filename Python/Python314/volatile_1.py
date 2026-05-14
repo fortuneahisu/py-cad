@@ -7,8 +7,8 @@ import numpy as np
 GRAVITY = np.array([0.0, -9.81])
 DT = 0.001
 
-angle = np.radians(60)
-SPEED = 45
+angle = np.radians(input('Angle: '))
+SPEED = input('Speed: ')
 
 position = np.array([0.0, 0.0])
 

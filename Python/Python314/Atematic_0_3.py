@@ -18,9 +18,6 @@ friends = [
     "Towokpebe",
     "Sultan",
     "Joel",
-    "Nido",
-    "Junia",
-    "Tobi",
 ]
 math_words = [
     "solve",
@@ -34,14 +31,53 @@ math_words = [
     "-",
     "/",
 ]
-fun_words = ["joy", "party", "games", "fun", "game", "play"]
-study_words = ["study", "read", "learn"]
-climate_words = ["time", "date", "when", "today", "schedule", "weather"]
-complements = ["nice", "lit", "impressive", "smart", "intelligent", "good", "excelent"]
+fun_words = [
+    "joy",
+    "party",
+    "games",
+    "fun",
+    "game",
+    "play",
+]
+study_words = [
+    "study",
+    "read",
+    "learn",
+]
+climate_words = [
+    "time",
+    "date",
+    "when",
+    "today",
+    "schedule",
+    "weather",
+]
+complements = [
+    "nice",
+    "lit",
+    "impressive",
+    "smart",
+    "intelligent",
+    "good",
+    "excelent",
+]
+well_being_words = [
+    "how are you",
+    "how are you?",
+    "how body?",
+    "how body",
+    "what's up",
+    "whats up",
+    "whats up?",
+    "what's up?",
+    "whats popping",
+    "how life",
+]
 curses = [
     "fuck you",
     "fucker",
     "idiot",
+    "shit",
     "dull",
     "foolish",
     "stupid",
@@ -50,13 +86,16 @@ curses = [
     "mumu",
     "ass",
     "assface",
+    "fool",
     "bamf",
+    "dumb",
     "motherfucker",
     "mother fucker",
     "bitch",
+    "prick",
 ]
 i_know = [
-    "Why not? ",
+    "Why wouldn't I be? ",
     "Were you expecting less? ",
     "Thanks",
     "I know",
@@ -65,11 +104,16 @@ i_know = [
 to_you_too = [
     "Fuck you too, dumbass",
     "Didn't i tell you I was dumb, now you're as dumb as I am",
-    "Check your head for a brain, I doubt you'll find",
+    "Check your head for a brain, I doubt you'll find one",
     "You're as dumb as you're blind",
     "Geez, Humans never disappoint, do they?",
     "CLassic idiot, well exoected of you tho",
-    "You say to me, the literal dumbest thing you'll talk to asides your self",
+    "Am I disappointed?, no. Classic you",
+    "'Idiot gets a gadget' story line",
+    "Attention seeker much?",
+    "I'm sad for you. That's a lie, I'm not",
+    "'Uno reverse'",
+    "You say to me, the literal dumbest thing you'll talk to asides yourself",
 ]
 agreement = [
     "yeah",
@@ -102,6 +146,7 @@ agreement = [
     "heck yes",
     "why not",
     "why not?",
+    "yes it is",
 ]
 disagreement = [
     "nay",
@@ -109,6 +154,8 @@ disagreement = [
     "no",
     "n",
     "not",
+    "leave",
+    "go out",
     "hell nah",
     "hell no",
     "absolutely not",
@@ -132,6 +179,8 @@ small_talk = [
     "You might notice I'm ignoring some of you messages, It's that I can't just reply",
     "Bear with me for my inabilities",
     "I'm sure it's annoying that I'm not the best",
+    "Typing '0' in menu choices closes the menu",
+    "Any disagreement word kicks you out of a conversation",
 ]
 
 
@@ -172,6 +221,7 @@ def math_function(name):
                         "1: Quadratic equation solver\n"
                         "2: Factorial finder\n"
                         "3: Basic calculator\n"
+                        "0: Quit\n"
                     )
                 )
                 if key == 1:
@@ -186,6 +236,9 @@ def math_function(name):
                     break
                 if key == 3:
                     print(math_works.calculate())
+                    break
+                if key == 0:
+                    print("Suit yourself")
                     break
             except ValueError:
                 print("Choose a number from the damn menu")
@@ -212,6 +265,7 @@ def fun_function(word, name):
                         "1: Test questions\n"
                         "2: Whatsapp simulation\n"
                         "3: Rock-paper-scissors\n"
+                        "0: Quit\n"
                     )
                 )
                 if choice == 1:
@@ -222,6 +276,9 @@ def fun_function(word, name):
                     break
                 if choice == 3:
                     general_modules.rock_paper_scissors()
+                    break
+                if choice == 0:
+                    print("Suit yourself")
                     break
             except ValueError:
                 print("You're meant to choose a value from the menu")
@@ -273,6 +330,26 @@ def climate_function():
         print("I'll assume you mean no")
 
 
+def well_being(word):
+    """Well-being function"""
+    if word in [
+        "how are you",
+        "how are you?",
+        "how body?",
+        "how body",
+        "how life",
+    ]:
+        print("Let's say I'm hangin in here fine, Thanks for asking")
+    elif word in [
+        "what's up",
+        "whats up",
+        "whats up?",
+        "what's up?",
+        "whats popping",
+    ]:
+        print("I wouldn't know, I'm dumb")
+
+
 def interface():
     """Main UX interface"""
     # introduction()
@@ -316,10 +393,13 @@ def interface():
                 climate_function()
         for word in complements:
             if word in message:
-                random.choice(i_know)
+                print(random.choice(i_know))
         for word in curses:
             if word in message:
-                random.choice(to_you_too)
+                print(random.choice(to_you_too))
+        for word in well_being_words:
+            if word in message:
+                well_being(word)
 
 
 if __name__ == "__main__":
