@@ -27,6 +27,7 @@ from module_packs import general_modules, math_works
 
 MY_NAME = "Declan"
 
+
 def introduction():
     """Last log message from Beta 001"""
     print("\"See, I have had other trials of this before, you're the 002 version!")
@@ -225,24 +226,31 @@ def interface():
         for word in math_words:
             if word in message:
                 math_function(name)
+                break
         for word in fun_words:
             if word in message:
                 fun_function(word, name)
+                break
         for word in study_words:
             if word in message:
                 study_function(name)
+                break
         for word in climate_words:
             if word in message:
                 climate_function()
+                break
         for word in complements:
             if word in message:
                 print(random.choice(i_know))
+                break
         for word in curses:
             if word in message:
                 print(random.choice(to_you_too))
+                break
         for word in well_being_words:
             if word in message:
                 well_being(word)
+                break
 
 
 if __name__ == "__main__":
