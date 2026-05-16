@@ -4,24 +4,7 @@ Custom exhaustive module on mathematical concepts
 
 import cmath
 
-disagreement = [
-    "nay",
-    "nah",
-    "no",
-    "quit",
-    "break",
-    "n",
-    "hell nah",
-    "hell no",
-    "absolutely not",
-    "why would i",
-    "none",
-    "why would I",
-    "why would I?",
-    "nothing",
-    "nothing here",
-    "="
-]
+from constants import disagreement
 
 
 def quadratic_equation(a: int, b: int, c: int):
@@ -75,22 +58,22 @@ def factorial(number: int):
     return number_factorial
 
 
-def add(number_1, number_2):
+def add(number_1: float, number_2: float):
     "Basic additive function"
     return number_1 + number_2
 
 
-def subtract(number_1, number_2):
+def subtract(number_1: float, number_2: float):
     "Basic subtractive function"
     return number_1 - number_2
 
 
-def divide(number_1, number_2):
+def divide(number_1: float, number_2: float):
     "Basic divisive function"
     return number_1 / number_2
 
 
-def multiply(number_1, number_2):
+def multiply(number_1: float, number_2: float):
     "Basic multiplicative function"
     return number_1 * number_2
 

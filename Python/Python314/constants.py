@@ -1,3 +1,6 @@
+"""
+Repetitive values are here
+"""
 agreement = [
     "ya",
     "true",
@@ -26,6 +29,8 @@ agreement = [
     "absolutely",
     "ya",
     "true",
+    "yes i do",
+    "yeah",
     "done",
     "yes",
     "y",
@@ -55,6 +60,9 @@ disagreement = [
     "nothing here",
     "false",
     "undone",
+    "=",
+    "q",
+    "quit",
     "no",
 ]
 
@@ -66,10 +74,12 @@ friends = [
     "Sultan",
     "Joel",
 ]
-math_words = [
+math_words = (
     "solve",
     "calculate",
     "math",
+    "quadratic",
+    "calculator",
     "add",
     "subtract",
     "divide",
@@ -77,28 +87,28 @@ math_words = [
     "+",
     "-",
     "/",
-]
-fun_words = [
+)
+fun_words = (
     "joy",
     "party",
     "games",
     "fun",
     "game",
     "play",
-]
-study_words = [
+)
+study_words = (
     "study",
     "read",
     "learn",
-]
-climate_words = [
+)
+climate_words = (
     "time",
     "date",
     "when",
     "today",
     "schedule",
     "weather",
-]
+)
 complements = [
     "nice",
     "lit",
@@ -154,7 +164,7 @@ to_you_too = [
     "Check your head for a brain, I doubt you'll find one",
     "You're as dumb as you're blind",
     "Geez, Humans never disappoint, do they?",
-    "CLassic idiot, well expected of you tho",
+    "CLassic idiot, well expected of you though",
     "Am I disappointed?, no. Classic you",
     "'Idiot gets a gadget' story line",
     "Attention seeker much?",
@@ -162,7 +172,6 @@ to_you_too = [
     "'Uno reverse'",
     "You say to me, the literal dumbest thing you'll talk to asides yourself",
 ]
-
 small_talk = [
     "Okay, let's continue...",
     "Easter egg: my creator's name is Fortune",
@@ -173,3 +182,4 @@ small_talk = [
     "Typing '0' in menu choices closes the menu",
     "Any disagreement word kicks you out of a conversation",
 ]
+people = []

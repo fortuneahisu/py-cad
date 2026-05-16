@@ -10,7 +10,6 @@ from random import randint
 
 from module_packs import basic_modules
 
-
 def test_questions():
     """
     Test to measure my knowledge of 'for' loops
@@ -53,7 +52,19 @@ def whatsapp_init_login():
     """
     print("Welcome to Whatsapp")
     time.sleep(2)
-    input("Input your phone number: ")
+    while True:
+        try:
+            phone_no = input("Input your phone number: ")
+            if len(phone_no) != 11:
+                print("Phone numbers are 11 digit, c'mon")
+                continue
+            if phone_no[1:3] not in ["80", "90", "70", "81", "91", "71"]:
+                print("Phone numbers don't start with that, c'mon")
+                continue
+            break
+        except TypeError:
+            print("TypeError, Phone numbers are 11 digit")
+            continue
     print("Looks like you're new, how would you love to signup:")
     signup_choice = (
         "E-mail verification",
@@ -180,10 +191,6 @@ Hospital game
 """
 
 
-title = "Hospital game"
-basic_modules.print_title(title)
-
-
 def gameplay(name):
     """Gameplay of the hospital game"""
     survival_rate = randint(1, 100)
@@ -231,15 +238,7 @@ def call_your_wife(name):
     input("Say something to your babe...\n")
     time.sleep(1)
     for item in name:
-        if name in [
-            "Oba",
-            "Obafemi",
-            "Tk",
-            "Towokpebe",
-            "Sultan",
-            "Joel",
-            "Fortune"
-        ]:
+        if name in ["Oba", "Obafemi", "Tk", "Towokpebe", "Sultan", "Joel", "Fortune"]:
             print("What did you just type?, I know you don't gats a babe")
     else:
         print("Sending...")
@@ -284,5 +283,5 @@ def hospital_game():
         continue
 
 
-if __name__ == "__main__":
-    hospital_game()
+# if __name__ == "__main__":
+#     whatsapp_simulation()

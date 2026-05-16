@@ -8,7 +8,6 @@ from math import cos, pi, sin
 import matplotlib.pyplot as plt
 import numpy as np
 
-fig, ax = plt.subplots()
 
 
 def motion_simulator():
@@ -52,11 +51,11 @@ def motion_simulator():
 
 def travel_path(x_path, y_path):
     """Trace the path of the player"""
+    _, ax = plt.subplots()
     color = random.choice(["red", "blue", "green", "pink", "black"])
     ax.plot(x_path, y_path, color=color, label="Travel path")
     ax.set_aspect("equal")
     ax.set_title("Cartesian vectorial positioning")
-    plt.legend()
     plt.grid()
     plt.show()
 

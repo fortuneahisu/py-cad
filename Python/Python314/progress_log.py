@@ -23,7 +23,7 @@ subjects = {
 
 
 
-def write_to_file(mode):
+def write_to_file(mode:str):
     """Writing to file"""
     with open(FILE, mode) as log:
         log.write(f"{'-' * 50}\n")

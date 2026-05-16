@@ -5,11 +5,11 @@ Practice on matplotlib integrated with numpy
 import matplotlib.pyplot as plt
 import numpy as np
 
-xstart = 0
-xstop = 2 * np.pi
-increment = 0.001
+XSTART = 0
+XSTOP = 2 * np.pi
+INCREMENT = 0.001
 
-x = np.arange(xstart, xstop, increment)
+x = np.arange(XSTART, XSTOP, INCREMENT)
 y = np.sin(x)
 z = np.cos(x)
 plt.subplot(2, 1, 1)
