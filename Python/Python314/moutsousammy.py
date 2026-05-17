@@ -6,6 +6,7 @@ Beta 002b
 import csv
 import datetime
 import os
+
 # import random
 from time import sleep
 
@@ -36,8 +37,6 @@ line = []
 MY_NAME = "Moutsousammy"
 NAMES = "names.csv"
 SUGGESTIONS = "suggestions.txt"
-today = datetime.date.today()
-time = datetime.datetime.now().strftime("%H:%M")
 print(f"Hi, my name is {MY_NAME}, I'll try to be engaging, but bear with me")
 sleep(0.5)
 
@@ -282,13 +281,20 @@ def study_function(name, *args):
 
 
 def datetime_function(name, *args):
+    today = datetime.date.today()
+    hour = datetime.datetime.now().strftime("%H")
+    if int(hour) // 12:
+        meridian = "PM"
+    else:
+        meridian = "AM"
+    time = datetime.datetime.now().strftime(f"{int(hour) % 12}:%M {meridian}")
     """Date-time information access"""
     want = args[0]
     while True:
         if word in ["time", "now", "right now"]:
-            print(f"As we speak, time is {datetime.datetime.now().strftime('%H:%M')}")
+            print(f"As we speak, time is {time}")
         elif word in ["date", "today"]:
-            print(f"Today is {datetime.date.today()}")
+            print(f"Today is {today}")
         elif word in ["weather", "hot", "cold", "rain", "rainy", "chill"]:
             print(f"I'm sorry but I can't help with \"{want}\" right now")
         affirmation = input("Have I done what you wanted? ").strip().lower()
@@ -321,7 +327,7 @@ for words in fun_words:
     libraries[words] = fun_function
 while True:
     # print(random.choice(small_talk))
-    message = input("What do you have to say? ").split()
+    message = input("What do you have to say? \n").split()
     for word in message:
         if word.lower() in libraries:
             libraries[word](name, word)

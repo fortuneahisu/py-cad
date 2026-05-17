@@ -136,7 +136,7 @@ nav:hover {
 }
 
 #title::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 50%;
     bottom: 30px;
@@ -186,7 +186,7 @@ nav:hover {
 }
 
 #about_the_creator::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 50%;
     bottom: 30px;

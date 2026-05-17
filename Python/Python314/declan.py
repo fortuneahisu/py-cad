@@ -18,7 +18,7 @@ from constants import (
     fun_words,
     i_know,
     math_words,
-    small_talk,
+    # small_talk,
     study_words,
     to_you_too,
     well_being_words,
@@ -30,7 +30,7 @@ MY_NAME = "Declan"
 
 def introduction():
     """Last log message from Beta 001"""
-    print("\"See, I have had other trials of this before, you're the 002 version!")
+    print("\"See, I have had other trials of this before, you're the 002a version!")
     sleep(2)
     print("But they all could do only one thing")
     sleep(1.5)
@@ -96,7 +96,7 @@ def math_function(name):
 def fun_function(word, name):
     """Fun knowledge base"""
     affirmation = (
-        input(f"Speaking of '{word}', would you like to have some fun? ")
+        input(f"Speaking of '{word}', would you like to have some fum? ")
         .lower()
         .strip()
     )
@@ -179,9 +179,12 @@ def well_being(word):
     if word in [
         "how are you",
         "how are you?",
+        "how are ya",
         "how body?",
         "how body",
         "how life",
+        "hows it going",
+        "how's it going",
     ]:
         print("Let's say I'm hangin in here fine, Thanks for asking")
     elif word in [
@@ -221,7 +224,7 @@ def interface():
         )
     sleep(2)
     while True:
-        print(random.choice(small_talk))
+        # print(random.choice(small_talk))
         message = input().lower()
         for word in math_words:
             if word in message:

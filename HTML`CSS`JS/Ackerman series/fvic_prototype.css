@@ -4,7 +4,7 @@
 }
 
 body {
-    font-family: 'Bahnschrift light', serif;
+    font-family: "Bahnschrift light", serif;
     font-size: 1.125rem;
 
     line-height: 1.75;
@@ -163,7 +163,7 @@ body {
 .nav-class a:hover {
     color: aliceblue;
     background-color: rgb(61, 61, 255, 0.75);
-    transform: translateX(0.375rem)
+    transform: translateX(0.375rem);
 }
 
 h2 {
@@ -175,7 +175,7 @@ h2 {
 }
 
 h3::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 50%;
     bottom: 0;
@@ -268,7 +268,9 @@ section p {
     padding: 0.75rem;
     color: rgb(100, 100, 100);
     font-size: 1rem;
-    font-family: Bahnschrift light, serif;
+    font-family:
+        Bahnschrift light,
+        serif;
     background: rgb(250, 250, 250);
     border-radius: 0.5rem;
     border: 1px solid blue;
@@ -287,7 +289,9 @@ section p {
     text-align: center;
     padding: 0.25rem;
     font-size: 1.125rem;
-    font-family: Bahnschrift light, serif;
+    font-family:
+        Bahnschrift light,
+        serif;
     border-radius: 0.375rem;
     margin-top: 3rem;
     margin-bottom: 3rem;

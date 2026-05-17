@@ -1,5 +1,5 @@
 """
-Trial on trajectory graph
+Trial on launch path graph
 """
 
 import matplotlib.pyplot as plt
