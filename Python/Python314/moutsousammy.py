@@ -291,11 +291,11 @@ def datetime_function(name, *args):
     """Date-time information access"""
     want = args[0]
     while True:
-        if word in ["time", "now", "right now"]:
+        if want in ["time", "now", "right now"]:
             print(f"As we speak, time is {time}")
-        elif word in ["date", "today"]:
+        elif want in ["date", "today"]:
             print(f"Today is {today}")
-        elif word in ["weather", "hot", "cold", "rain", "rainy", "chill"]:
+        elif want in ["weather", "hot", "cold", "rain", "rainy", "chill"]:
             print(f"I'm sorry but I can't help with \"{want}\" right now")
         affirmation = input("Have I done what you wanted? ").strip().lower()
         if affirmation in agreement:

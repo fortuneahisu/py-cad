@@ -4,9 +4,10 @@ Beta 002a
 """
 
 import datetime
+import os
 import random
 from time import sleep
-
+import csv
 import progress_log
 from constants import (
     agreement,
@@ -26,7 +27,8 @@ from constants import (
 from module_packs import general_modules, math_works
 
 MY_NAME = "Declan"
-
+NAMES = "names.csv"
+previous_people = []
 
 def introduction():
     """Last log message from Beta 001"""
@@ -44,6 +46,47 @@ def introduction():
     print(" " * 45 + "-Fortune, your creator")
     sleep(2)
     return "\n"
+
+
+def store_info(name, memory):
+    """Storing user data, if unavailable"""
+    print("We don't seem to have talked before")
+    while True:
+        while True:
+            try:
+                age = int(input("I'd love to know how old you are? "))
+                break
+            except ValueError:
+                print("Age is just a number")
+                continue
+        try:
+            writer = csv.writer(memory)
+            writer.writerow([f"{name}", f"{age}"])
+            break
+        except ValueError as val_err:
+            print(val_err)
+            continue
+
+
+def check_user(name):
+    """Checking if user data is stored"""
+    content = "Content from names.json"
+    if os.path.exists(NAMES):
+        with open(NAMES, "r") as memory:
+            content = csv.DictReader(memory)
+            for row in content:
+                previous_people.append(row["Name"])
+            if name in previous_people:
+                print(f"Hey! {name}. You're back again")
+                sleep(0.5)
+            else:
+                with open(NAMES, "a", newline="") as memory:
+                    store_info(name, memory)
+    else:
+        with open(NAMES, "w", newline="") as memory:
+            writer = csv.writer(memory)
+            writer.writerow(["Name", "Age"])
+            store_info(name, memory)
 
 
 def math_function(name):
@@ -201,6 +244,7 @@ def interface():
     """Main UX interface"""
     # introduction()
     name = input("What's your first name, user? ").capitalize().strip()
+    check_user(name)
     if name == "Fortune":
         print("That's my creators name!, anyways...")
         print("I may just be the dumbest 'AI' you'll encounter")
@@ -213,6 +257,8 @@ def interface():
     elif name.lower() in curses:
         print("I doubt it, let's use our brains here shall we?")
         print(f"Anyways, we'll continue with '{name}'")
+    elif name in previous_people:
+        print("What is it this time? ")
     elif name in friends:
         print("Ah shit, not you again")
         print(
@@ -254,6 +300,9 @@ def interface():
             if word in message:
                 well_being(word)
                 break
+        for word in disagreement:
+            if word in message:
+                return "Chiao peep"
 
 
 if __name__ == "__main__":
