@@ -1,19 +1,22 @@
+html {
+    scroll-behavior: smooth;
+}
 body {
-    font-family: Lilex;
+    font-family: Lilex, monospace;
     /*font-style: italic;*/
     margin: 0px;
     font-size: 1rem;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    line-height: 1.5;
+    line-height: 2;
     justify-content: space-between;
 }
-
 #header {
     display: flex;
     flex-direction: column;
-    font-size: 20pt;
+    font-size: 22.5px;
+    z-index: 1000;
     text-align: center;
     background-color: rgba(230, 230, 230, 0.75);
     border-bottom-left-radius: 37.5px;
@@ -21,53 +24,38 @@ body {
     border: 1px solid black;
     position: fixed;
     width: 100%;
-    top: -75px;
+    top: -60px;
     margin: 0px;
     padding: 25px 0px 25px 0px;
-    transition: 0.3s;
-    animation: show 2s infinite ease-in-out;
-}
-
-@keyframes show {
-    0% {
-        transform: translateY(0px);
-    }
-
-    50% {
-        transform: translateY(10px);
-    }
-
-    100% {
-        transform: translateY(-0px);
-    }
+    transition: 0.375s ease-in-out;
 }
 
 #header:hover {
     top: 0px;
-    animation: show 0s infinite ease-in-out;
+    animation: none;
 }
 
 h1 {
-    font-size: 17.5pt;
+    font-size: 20px;
     text-align: left;
-    margin: 20px;
+    margin: 50px;
     padding: 2.5px 7.5px 2.5px 7.5px;
     text-align: center;
-    border-radius: 15px;
-    display: inline-block;
-    background-color: rgba(200, 200, 200, 1);
+    border-radius: 50px;
+    display: block;
+    background-color: rgba(190, 190, 190, 1);
 }
-
 .whatsnew {
-    border-color: rgba(245, 245, 245, 1);
+    border-color: rgba(50, 50, 50, 1);
     border-bottom: 1px solid;
+    border-top: 1px dashed;
     background-color: rgba(240, 240, 240, 0.25);
     border-bottom-left-radius: 37.5px;
     border-bottom-right-radius: 37.5px;
-    padding: 112.5px 37.5px 37.5px 37.5px;
+    padding: 150px 10% 37.5px 10%;
 }
 
-.whatsnew.ul.li {
+.whatsnew ul li {
     font-size: 12pt;
     text-align: left;
 }
@@ -83,7 +71,6 @@ p {
     background-color: rgba(240, 240, 240, 1);
     text-align: center;
     margin: 7.5%;
-    align-items: center;
     padding: 0.25rem 0.25rem 0.25rem 2.5rem;
     border-left: 1px solid;
     border-radius: 42.5px;
@@ -92,13 +79,14 @@ p {
 .navigate {
     position: fixed;
     right: 7.5%;
-    top: 72px;
+    top: 42.5px;
     transition: 0.3s;
     width: 177.13px;
+    color: rgba(0, 0, 0, 1);
     opacity: 0.75;
     text-align: center;
     padding: 5px;
-    border-radius: 17.5px;
+    border-radius: 22.5px;
     border: 1px solid rgba(170, 170, 170, 1);
     background-color: rgba(190, 190, 190, 0.25);
 }
@@ -136,21 +124,28 @@ p {
 }
 
 a {
-    color: rgba(100, 100, 100, 1);
+    color: rgba(60, 60, 60, 1);
     text-decoration: none;
+    transition: 0.25s ease-in-out;
 }
-
+a:hover {
+    color: black;
+    font-weight: 900;
+}
 .navigateitems li:hover {
     transform: translateX(5px);
     background: rgba(245, 245, 245, 0.875);
     color: rgba(100, 100, 100, 1);
     opacity: 1;
     transition: 0.1s;
+    color: black;
+    font-weight: 900;
 }
 
 .outdated {
     color: rgba(0, 0, 0, 0.625);
     list-style-type: circle;
+    text-decoration: line-through;
 }
 
 .memorylane {
@@ -168,7 +163,8 @@ a {
     text-align: left;
     border-radius: 37.5px;
     padding: 10px 37.5px 10px 37.5px;
-    margin: 12.5px;
+    margin: 37.5px;
+    box-shadow: 1px 1px 1.5px 2px darkgrey;
 }
 
 .history {
@@ -177,7 +173,6 @@ a {
     background-color: rgba(240, 240, 240, 1);
     text-align: center;
     margin: 7.5%;
-    align-items: center;
     padding: 0.25rem 0.25rem 0.25rem 2.5rem;
     border-left: 1px solid;
     border-radius: 42.5px;
