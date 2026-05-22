@@ -2,7 +2,9 @@
     background-color: rgb(94, 0, 138);
     color: rgb(164, 229, 255);
 }
-
+html {
+    scroll-behavior: smooth;
+}
 body {
     font-family: "Bahnschrift light", serif;
     font-size: 1.125rem;
@@ -80,17 +82,28 @@ body {
     text-align: center;
     align-items: center;
     align-content: center;
-    border-radius: 0.25rem;
+    border-radius: 2rem;
     background: rgb(153, 153, 255);
     transition: 0.1s ease-in-out;
 }
 
 #nav-dropdown {
-    display: none;
+    opacity: 0.3;
+    display: inline;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid blue;
+    position: fixed;
+    top: 5rem;
+    right: 1rem;
+    border-radius: 1.75rem;
+    background-color: rgba(168, 168, 255, 0.625);
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
 }
 
-.nav-links:hover #nav-dropdown {
+#nav_button:hover ~ #nav-dropdown {
     display: flex;
+    opacity: 1;
     flex-direction: column;
     border: 1px solid blue;
     position: fixed;
@@ -104,9 +117,8 @@ body {
 #nav-button {
     border: 1px solid blue;
     position: fixed;
-    top: 1rem;
-    right: 1rem;
-    min-width: 10%;
+    right: 2%;
+    top: 2%;
     padding: 0.125rem 0.5rem;
     text-align: center;
     font-size: 1.25rem;
@@ -117,7 +129,7 @@ body {
     animation: y-iteration 1s ease-in-out infinite;
 }
 
-.nav-links:hover #nav-button {
+.nav-class #nav-button:hover {
     border: 1px solid rgb(0, 0, 160);
     background-color: rgba(168, 168, 255, 0.75);
 }

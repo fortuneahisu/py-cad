@@ -166,7 +166,9 @@ a:hover {
     margin: 37.5px;
     box-shadow: 1px 1px 1.5px 2px darkgrey;
 }
-
+.memory p::before {
+    content: "⇒ ";
+}
 .history {
     display: flex;
     flex-direction: column;
