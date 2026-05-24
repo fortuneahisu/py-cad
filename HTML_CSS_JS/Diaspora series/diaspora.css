@@ -1,0 +1,352 @@
+::selection {
+    background-color: rgb(94, 0, 138);
+    color: rgb(164, 229, 255);
+}
+
+html {
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: "Bahnschrift light", "Segoe UI", sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.75;
+    margin: 0;
+    background: rgb(248, 249, 250);
+    color: rgb(50, 50, 50);
+}
+
+#heading {
+    font-size: 2.25rem;
+    text-align: center;
+    font-weight: 800;
+    display: inline-block;
+    margin: 1.5rem auto;
+    color: rgb(40, 44, 52);
+    padding: 0.75rem 2.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    background: rgb(225, 225, 255);
+}
+
+#nav-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    background: rgb(188, 188, 255);
+    margin: 0;
+}
+
+.welcome {
+    background: rgb(188, 188, 255);
+    margin: 0;
+    padding: 1rem 1rem 3rem 1rem;
+    text-align: center;
+}
+
+.logo-link {
+    display: inline-block;
+    border-radius: 50%;
+    transition: border-radius 0.3s ease-in-out;
+}
+
+.logo-link:hover {
+    border-radius: 0%;
+}
+
+#nav-wrap img {
+    border-radius: 50%;
+    margin: 0;
+    height: 180px;
+    width: 180px;
+    border: 3px solid rgb(255, 255, 255);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+    transform-origin: center center;
+    transition:
+        transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+        border-radius 0.4s ease-in-out;
+}
+
+#nav-wrap img:hover {
+    transform: scale(1.15);
+    border-radius: 0%;
+}
+
+.nav-class {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 1000;
+}
+
+#nav-button {
+    border: 1px solid rgb(61, 61, 255);
+    padding: 0.5rem 1.25rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 2rem;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+#nav-button:hover {
+    background-color: rgb(61, 61, 255);
+    color: rgb(255, 255, 255);
+}
+
+#nav-dropdown {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.nav-class:hover #nav-dropdown {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    flex-direction: column;
+    gap: 0.25rem;
+    position: absolute;
+    top: 3rem;
+    right: 0;
+    width: 260px;
+    padding: 0.75rem;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+}
+
+.nav-class a {
+    color: rgb(50, 50, 50);
+    text-decoration: none;
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+    border-radius: 0.5rem;
+    background: transparent;
+    transition: all 0.2s ease-in-out;
+    text-align: left;
+}
+
+.nav-class a:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(61, 61, 255);
+    transform: translateX(4px);
+}
+
+h2 {
+    text-align: center;
+    padding: 0;
+    margin: 1rem 0 0 0;
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: rgb(90, 95, 105);
+}
+
+h3 {
+    text-align: center;
+    font-size: 2.25rem;
+    position: relative;
+    margin: 4rem 0 2rem 0;
+    color: rgb(40, 44, 52);
+}
+
+h3::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 4px;
+    background-color: rgb(61, 61, 255);
+    border-radius: 2px;
+}
+
+#preemptive {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 2.5rem;
+    text-align: center;
+    border-radius: 1rem;
+    line-height: 2;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    background-color: rgb(255, 255, 255);
+    border-top: 4px solid rgb(61, 61, 255);
+}
+
+#preemptive a {
+    color: rgb(61, 61, 255);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+#preemptive a:hover {
+    text-decoration: underline;
+}
+
+.main-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+section p {
+    line-height: 1.8;
+    color: rgb(70, 75, 85);
+    margin-bottom: 2.5rem;
+    text-align: justify;
+}
+
+.join-heading {
+    margin-top: 6rem;
+}
+
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    max-width: 1000px;
+    margin: 2rem auto 6rem auto;
+    padding: 0 1.5rem;
+}
+
+.auth-form {
+    background: rgb(255, 255, 255);
+    border-radius: 1rem;
+    padding: 2.5rem;
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+}
+
+.form-intro p {
+    text-align: center;
+    margin: 0 0 2rem 0;
+    padding: 0;
+    color: rgb(110, 115, 125);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: rgb(70, 75, 85);
+}
+
+.form-input {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    color: rgb(50, 50, 50);
+    font-size: 1rem;
+    font-family: inherit;
+    background: rgb(248, 249, 250);
+    border-radius: 0.5rem;
+    border: 1px solid rgb(210, 215, 225);
+    transition: all 0.2s ease-in-out;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: rgb(61, 61, 255);
+    background: rgb(255, 255, 255);
+    box-shadow: 0 0 0 3px rgba(61, 61, 255, 0.15);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.125rem;
+    font-family: inherit;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    margin-top: 1.5rem;
+    border: 1px solid rgb(61, 61, 255);
+    background: transparent;
+    color: rgb(61, 61, 255);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-submit:hover {
+    background: rgb(61, 61, 255);
+    color: rgb(255, 255, 255);
+}
+
+.btn-submit:disabled {
+    background-color: rgb(230, 235, 240);
+    border-color: rgb(210, 215, 225);
+    color: rgb(160, 165, 175);
+    cursor: not-allowed;
+}
+
+footer {
+    padding: 3rem 1.5rem;
+    background: rgb(20, 25, 40);
+    color: rgb(160, 165, 180);
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1.8;
+}
+
+footer p {
+    margin: 0.25rem 0;
+}
+
+.footer a {
+    color: rgb(120, 160, 255);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    #heading {
+        font-size: 1.75rem;
+        padding: 0.5rem 1.5rem;
+    }
+    h2 {
+        font-size: 1.25rem;
+    }
+    #preemptive {
+        margin: 2rem 1.5rem;
+        padding: 1.5rem;
+    }
+    .form-container {
+        margin-bottom: 4rem;
+    }
+}
