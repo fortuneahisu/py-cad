@@ -5,10 +5,9 @@ stem_dictionary = {
     "computations": "math",
     "compute": "math",
     "+": "math",
-    
     "chatting": "talk",
     "gossip": "talk",
-    "sub": "talk",
+    "sup": "talk",
     "vibe": "talk"
 }
 
