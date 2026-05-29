@@ -1,20 +1,241 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Patmos designs</title>
-    <link rel="stylesheet" href="redefinition.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PYTHON // JAVASCRIPT REAL-TIME MATRIX</title>
+    <style>
+        :root {
+            --bg-black: #050505;
+            --surface-gray: #0d0d0d;
+            --border-neon: #00ff66;
+            --border-dim: #1a1a1a;
+            --text-white: #ffffff;
+            --text-dim: #555555;
+            --font-mono: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            font-family: var(--font-mono);
+            margin: 0;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+
+        /* Architectural Grid Layout */
+        .dashboard_grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard_grid { grid-template-columns: 1fr; }
+        }
+
+        .panel {
+            background-color: var(--surface-gray);
+            border: 1px solid var(--border-dim);
+            padding: 2rem;
+            position: relative;
+            transition: border-color 0.3s ease;
+        }
+
+        .panel.active-stream {
+            border-color: #00ff6633;
+        }
+
+        h2 {
+            font-size: 1rem;
+            margin-top: 0;
+            letter-spacing: 2px;
+            color: var(--border-neon);
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 0.5rem;
+        }
+
+        .meta_line {
+            font-size: 0.85rem;
+            margin: 0.8rem 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .meta_value { color: #888; }
+
+        /* Dynamic Progress Bar Containers */
+        .meter_container {
+            margin: 1.5rem 0;
+        }
+
+        .meter_label {
+            font-size: 0.75rem;
+            margin-bottom: 0.4rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .bar_frame {
+            width: 100%;
+            height: 6px;
+            background-color: #111;
+            border: 1px solid #222;
+            overflow: hidden;
+        }
+
+        .bar_fill {
+            height: 100%;
+            width: 0%;
+            background-color: var(--border-neon);
+            transition: width 0.1s linear;
+        }
+
+        /* CPU Core Array Visualization Matrix */
+        .core_matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .core_box {
+            background-color: #111;
+            border: 1px solid var(--border-dim);
+            padding: 0.5rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            transition: background 0.1s ease, color 0.1s ease;
+        }
+
+        /* Real-Time Log Output Window */
+        #log_terminal {
+            height: 150px;
+            background-color: #020202;
+            border: 1px solid #111;
+            padding: 1rem;
+            font-size: 0.75rem;
+            color: #666;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+    </style>
 </head>
-
 <body>
-    <h1>Patmos designs</h1>
-    <div class="main_menu">
-        <div class="explore">welcome</div>
-        <div class="order">welcome</div>
-        <div class="">welcome</div>
-    </div>
-</body>
 
+    <h1 style="font-size: 1.2rem; margin-bottom: 2rem; letter-spacing: 4px;">// CORE MACHINE MATRIX TELEMETRY ENGINE</h1>
+
+    <div class="dashboard_grid">
+        
+        <div class="panel" id="static-panel">
+            <h2>STATIC ENGINE MANIFESTO</h2>
+            <div class="meta_line"><span>HOST OS:</span><span class="meta_value" id="meta-os">CONNECTING...</span></div>
+            <div class="meta_line"><span>ARCHITECTURE:</span><span class="meta_value" id="meta-arch">CONNECTING...</span></div>
+            <div class="meta_line"><span>LOGICAL CORES:</span><span class="meta_value" id="meta-cores">CONNECTING...</span></div>
+            <div class="meta_line"><span>PYTHON WORKER:</span><span class="meta_value" id="meta-py">CONNECTING...</span></div>
+            
+            <h2 style="margin-top: 3rem;">STREAM LOG</h2>
+            <div id="log_terminal">> Initializing handshake vector...</div>
+        </div>
+
+        <div class="panel" id="dynamic-panel">
+            <h2>REAL-TIME EXECUTION METRICS</h2>
+            
+            <div class="meter_container">
+                <div class="meter_label"><span>GLOBAL CPU LOAD</span><span id="txt-cpu">0%</span></div>
+                <div class="bar_frame"><div class="bar_fill" id="bar-cpu"></div></div>
+            </div>
+
+            <div class="meter_container">
+                <div class="meter_label"><span>VIRTUAL MEMORY USE</span><span id="txt-mem">0 GB (0%)</span></div>
+                <div class="bar_frame"><div class="bar_fill" id="bar-mem" style="background-color: #00e1ff;"></div></div>
+            </div>
+
+            <div class="meter_container">
+                <div class="meter_label"><span>ROOT STORAGE CAPACITY</span><span id="txt-disk">0%</span></div>
+                <div class="bar_frame"><div class="bar_fill" id="bar-disk" style="background-color: #ff0055;"></div></div>
+            </div>
+
+            <h2>PER-CORE SYSTEM PARALLELISM</h2>
+            <div class="core_matrix" id="core-grid"></div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const logWindow = document.getElementById('log_terminal');
+            
+            // Connect native browser JavaScript right to the custom running Python server instance
+            const ws = new WebSocket('ws://localhost:8765');
+
+            ws.onopen = () => {
+                document.getElementById('static-panel').classList.add('active-stream');
+                document.getElementById('dynamic-panel').classList.add('active-stream');
+                logWindow.innerHTML += `\n[HANDSHAKE_SUCCESS] Channel established with telemetry daemon.`;
+            };
+
+            ws.onmessage = (event) => {
+                // Parse serialized byte packets streamed directly from Python runtime
+                const data = JSON.parse(event.data);
+                
+                // 1. Map Structural Static Metadata Object Elements
+                document.getElementById('meta-os').innerText = data.static_meta.os;
+                document.getElementById('meta-arch').innerText = data.static_meta.arch;
+                document.getElementById('meta-cores').innerText = data.static_meta.cores;
+                document.getElementById('meta-py').innerText = data.static_meta.python_version;
+
+                // 2. Map Dynamic Graph Bar Transformations Globally
+                document.getElementById('txt-cpu').innerText = `${data.metrics.cpu_global_load}%`;
+                document.getElementById('bar-cpu').style.width = `${data.metrics.cpu_global_load}%`;
+
+                document.getElementById('txt-mem').innerText = `${data.metrics.memory_used_gb} GB (${data.metrics.memory_percent}%)`;
+                document.getElementById('bar-mem').style.width = `${data.metrics.memory_percent}%`;
+
+                document.getElementById('txt-disk').innerText = `${data.metrics.disk_percent}%`;
+                document.getElementById('bar-disk').style.width = `${data.metrics.disk_percent}%`;
+
+                // 3. Render and Scale Core-Specific Distribution Grid Arrays Dynamically
+                const coreGrid = document.getElementById('core-grid');
+                coreGrid.innerHTML = ''; // Efficient layout repaint clean
+                
+                data.metrics.cpu_core_loads.forEach((load, index) => {
+                    const box = document.createElement('div');
+                    box.className = 'core_box';
+                    box.innerText = `C${index}\n${Math.round(load)}%`;
+                    
+                    // High-load color alerts driven by raw metrics computation
+                    if(load > 70) {
+                        box.style.background = '#ff005522';
+                        box.style.borderColor = '#ff0055';
+                        box.style.color = '#ff0055';
+                    } else if(load > 15) {
+                        box.style.background = '#00ff6611';
+                        box.style.borderColor = '#00ff6644';
+                        box.style.color = '#00ff66';
+                    }
+                    coreGrid.appendChild(box);
+                });
+
+                // Append continuous packet logging matrix trackers
+                logWindow.innerText += `\nINBOUND_PACKET // TS: ${data.timestamp.toFixed(2)} // CPU: ${data.metrics.cpu_global_load}%`;
+                logWindow.scrollTop = logWindow.scrollHeight; // Auto-scrolls console
+            };
+
+            ws.onerror = (err) => {
+                logWindow.innerHTML += `\n[STREAM_ERROR] Connection denied. Ensure server.py engine is running live.`;
+                logWindow.style.color = '#ff0055';
+            };
+
+            ws.onclose = () => {
+                logWindow.innerHTML += `\n[CONNECTION_TERMINATED] Matrix bridge severed.`;
+            };
+        });
+    </script>
+</body>
 </html>
