@@ -1,6 +1,7 @@
 """
 Repetitive values are here
 """
+
 agreement = [
     "ya",
     "true",
@@ -186,3 +187,16 @@ small_talk = [
     "Any disagreement word kicks you out of a conversation",
 ]
 people = []
+project_alias = [
+    "btq",
+    "xtc",
+    "dxt",
+    "qtk",
+    "srg",
+    "nmj",
+    "atl",
+    "ptr",
+    "drt",
+    "bkt",
+    "vtx",
+]

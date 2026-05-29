@@ -1,0 +1,30 @@
+{
+    "Monday": [
+        "Maths",
+        "Physics"
+    ],
+    "Tuesday": [
+        "Physics",
+        "Chemistry"
+    ],
+    "Wednesday": [
+        "Maths",
+        "Python"
+    ],
+    "Thursday": [
+        "Physics",
+        "FreeCAD"
+    ],
+    "Friday": [
+        "Chemistry",
+        "Maths"
+    ],
+    "Saturday": [
+        "Review",
+        "Problem sets"
+    ],
+    "Sunday": [
+        "Light study",
+        "Python problems"
+    ]
+}

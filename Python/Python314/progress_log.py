@@ -1,78 +1,92 @@
 """Module responsible for tracking my study progress after August 17th"""
 
 import datetime
-import os
+
 from constants import agreement, disagreement
+from file_i_o import fix_file, load_data, save_data
+
 date = datetime.date.today()
-FILE = "progress_log.txt"
-weekday = date.strftime("%A")
-subject = 0
-status = 0
-content = "Printed content for assertion"
-subject_status = {}
-
-subjects = {
-    "Monday": ("Maths", "Physics"),
-    "Tuesday": ("Physics", "Chemistry"),
-    "Wednesday": ("Maths", "Python"),
-    "Thursday": ("Physics", "FreeCAD"),
-    "Friday": ("Chemistry", "Maths"),
-    "Saturday": ("Review", "Problem sets"),
-    "Sunday": ("Light study", "Python problems"),
-}
+TIME_STAMP = str(datetime.datetime.now().strftime("%d%m%y%H%M"))
+today = date.strftime("%A")
+LOG_FILE = "progress_log.json"
+TIME_TABLE = "time_table.json"
 
 
-
-def write_to_file(mode:str):
-    """Writing to file"""
-    with open(FILE, mode) as log:
-        log.write(f"{'-' * 50}\n")
-        log.write(f"{date}\n")
-        log.write(f"{'-' * 50}\n")
-        for item in subject_status:
-            log.write(f"-> {item} | [{subject_status[item]}]\n")
-        log.write(f"{'-' * 50}\n")
-
-
-def check_daily_status(subjects, subject_status):
-    """Checking if a day's subjects have been studied"""
-    for day in subjects:
-        if weekday == day:
-            for subject in subjects[day]:
-                print(subject)
+def subject_status():
+    """Progress status for each subject for each day"""
+    time_table = load_data(TIME_TABLE)
+    subjects = []
+    status = False
+    for day in time_table:
+        if day == today:
+            for subject in time_table[day]:
                 while True:
-                    try:
-                        status = input("Status: ").lower().strip()
-                        if status in agreement:
-                            status = "Done"
-                            subject_status[subject] = status
-                            break
-                        if status in disagreement:
-                            status = "Pending indefinitely..."
-                            subject_status[subject] = status
-                            break
-                        else:
-                            print('"status" is either "true" or "false"')
-                            continue
-                    except TypeError:
-                        print('"status" is text (true or false)')
+                    affirmation = input(f"Has {subject} been studied? ").lower().strip()
+                    if affirmation in agreement:
+                        status = True
+                        subjects.append({subject: status})
+                        print("Great!")
                         break
+                    if affirmation in disagreement:
+                        status = False
+                        subjects.append({subject: status})
+                        print("Pending indefinitely...")
+                        break
+                    print("What was that? ")
+                    continue
+    log_file = load_data(LOG_FILE)
+    log_file[f"{TIME_STAMP}"] = {today: subjects}
+    save_data(log_file, LOG_FILE)
+
+
+def run_daily():
+    """Make sure there's one entry per day"""
+    log_file = load_data(LOG_FILE)
+    for unique_id in log_file:
+        if TIME_STAMP[0:5] == unique_id[0:5]:
+            print("You've inputted for today, come tomorrow")
+            return True
+    return False
+
+
+def gold_star():
+    """A little something to cheer you up"""
+    log_file = load_data(LOG_FILE)
+    for unique_id in log_file:
+        if TIME_STAMP == unique_id:
+            for subject_pair in log_file[TIME_STAMP][today]:
+                for subject in subject_pair:
+                    if subject_pair[subject] is False:
+                        return False
+    return True
 
 
 def progress_log():
     """Main UX interface"""
-    content = []
-    check_daily_status(subjects, subject_status)
-    if os.path.exists(FILE):
-        write_to_file("a")
-    else:
-        write_to_file("w")
-    for item in subject_status:
-        content = f"-> {item} | [{subject_status[item]}]"
-        print("-" * len(content))
-        print(content)
-    print("-" * len(content))
-    print("\nContent appended to progress_log.txt\n")
+    fix_file(LOG_FILE)
+    if run_daily():
+        while True:
+            affirmation = input("or do you want to edit your input? ")
+            if affirmation in agreement:
+                subject_status()
+                if gold_star():
+                    print("Nice, you've had it for today")
+                    print("Don't forget tomorrow")
+                elif not gold_star():
+                    print("Awwn, tomorrow is another day mate")
+                break
+            if affirmation in disagreement:
+                print("Make sure to study tomorrow")
+                break
+            print("I did not get that")
+            continue
+        return
+    subject_status()
+    if gold_star():
+        print("Hurray!, You completed today. Have a good night rest, chum")
+    elif not gold_star():
+        print("You'll get it later")
+    return
 
 
 if __name__ == "__main__":
