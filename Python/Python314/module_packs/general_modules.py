@@ -185,10 +185,10 @@ def palindrome_checker(word: str):
     return "Well, NOT a palindrome"
 
 
-"""
-Relationship between functions
-Hospital game
-"""
+# """
+# Relationship between functions
+# Hospital game
+# """
 
 
 def gameplay(name):
@@ -237,9 +237,8 @@ def call_your_wife(name):
     time.sleep(1)
     input("Say something to your babe...\n")
     time.sleep(1)
-    for item in name:
-        if name in ["Oba", "Obafemi", "Tk", "Towokpebe", "Sultan", "Joel", "Fortune"]:
-            print("What did you just type?, I know you don't gats a babe")
+    if name in ["Oba", "Obafemi", "Tk", "Towokpebe", "Sultan", "Joel", "Fortune"]:
+        print("What did you just type?, I know you don't gats a babe")
     else:
         print("Sending...")
         time.sleep(1)
@@ -257,7 +256,7 @@ def send_a_message(name):
 
 
 def hospital_game():
-    """Classic input-output code"""
+    """Main hospital game interface"""
     name = input("Input your first name and last name? ")
     age = input("How old are you? ")
     is_patient = input("Have you been here before?(True or False) ").title()

@@ -72,7 +72,7 @@ def check_user(name):
     """Checking if user data is stored"""
     content = "Content from names.json"
     if os.path.exists(NAMES):
-        with open(NAMES, "r") as memory:
+        with open(NAMES, "r", encoding="ANSI") as memory:
             content = csv.DictReader(memory)
             for row in content:
                 previous_people.append(row["Name"])
@@ -80,10 +80,10 @@ def check_user(name):
                 print(f"Hey! {name}. You're back again")
                 sleep(0.5)
             else:
-                with open(NAMES, "a", newline="") as memory:
+                with open(NAMES, "a", newline="", encoding="ANSI") as memory:
                     store_info(name, memory)
     else:
-        with open(NAMES, "w", newline="") as memory:
+        with open(NAMES, "w", newline="", encoding="ANSI") as memory:
             writer = csv.writer(memory)
             writer.writerow(["Name", "Age"])
             store_info(name, memory)
