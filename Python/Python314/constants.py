@@ -2,7 +2,7 @@
 Repetitive values are here
 """
 
-agreement = [
+agreement = (
     "ya",
     "true",
     "done",
@@ -38,8 +38,8 @@ agreement = [
     "fr",
     "bet",
     "of course",
-]
-disagreement = [
+)
+disagreement = (
     "nay",
     "nah",
     "no",
@@ -62,19 +62,27 @@ disagreement = [
     "false",
     "undone",
     "=",
+    "bye",
+    "goodbye",
     "q",
     "quit",
-    "no",
-]
-
-friends = [
+    "chiao",
+)
+exit_words = (
+    "exit",
+    "bye",
+    "goodbye",
+    "quit",
+    "leave",
+)
+friends = (
     "Oba",
     "Obafemi",
     "Tk",
     "Towokpebe",
     "Sultan",
     "Joel",
-]
+)
 math_words = (
     "solve",
     "calculate",
@@ -110,7 +118,7 @@ climate_words = (
     "schedule",
     "weather",
 )
-complements = [
+complements = (
     "nice",
     "lit",
     "impressive",
@@ -118,8 +126,8 @@ complements = [
     "intelligent",
     "good",
     "excelent",
-]
-well_being_words = [
+)
+well_being_words = (
     "how are you",
     "how are you?",
     "how body?",
@@ -133,8 +141,8 @@ well_being_words = [
     "what's up?",
     "whats popping",
     "how life",
-]
-curses = [
+)
+curses = (
     "fuck you",
     "fucker",
     "idiot",
@@ -154,29 +162,29 @@ curses = [
     "mother fucker",
     "bitch",
     "prick",
-]
-i_know = [
+)
+i_know = (
     "Why wouldn't I be? ",
     "Were you expecting less? ",
     "Thanks",
     "I know",
     "Really means alot",
-]
-to_you_too = [
+)
+to_you_too = (
     "Fuck you too, dumbass",
     "Didn't i tell you I was dumb, now you're as dumb as I am",
     "Check your head for a brain, I doubt you'll find one",
     "You're as dumb as you're blind",
     "Geez, Humans never disappoint, do they?",
-    "CLassic idiot, well expected of you though",
+    "Classic idiot, well expected of you though",
     "Am I disappointed?, no. Classic you",
     "'Idiot gets a gadget' story line",
     "Attention seeker much?",
     "I'm sad for you. That's a lie, I'm not",
     "'Uno reverse'",
     "You say to me, the literal dumbest thing you'll talk to asides yourself",
-]
-small_talk = [
+)
+small_talk = (
     "Okay, let's continue...",
     "Easter egg: my creator's name is Fortune",
     "Try key words about math, study, situational stuff or games!",
@@ -185,9 +193,9 @@ small_talk = [
     "I'm sure it's annoying that I'm not the best",
     "Typing '0' in menu choices closes the menu",
     "Any disagreement word kicks you out of a conversation",
-]
-people = []
-project_alias = [
+)
+people = ()
+project_alias = (
     "btq",
     "xtc",
     "dxt",
@@ -199,4 +207,17 @@ project_alias = [
     "drt",
     "bkt",
     "vtx",
-]
+)
+project_alias_mapping = {
+    "btq": "Baltiqua",
+    "xtc": "Ecstasy",
+    "dxt": "Daxite",
+    "qtk": "Kwintica",
+    "srg": "Sarai-G3",
+    "nmj": "Nemaje",
+    "atl": "Altentée",
+    "ptr": "Port-Raviine",
+    "drt": "Darington",
+    "bkt": "Belkant",
+    "vtx": "Vantrix",
+}

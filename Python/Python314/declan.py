@@ -3,11 +3,12 @@ Miniature Preliminary AI model
 Beta 002a
 """
 
+import csv
 import datetime
 import os
 import random
 from time import sleep
-import csv
+
 import progress_log
 from constants import (
     agreement,
@@ -15,6 +16,7 @@ from constants import (
     complements,
     curses,
     disagreement,
+    exit_words,
     friends,
     fun_words,
     i_know,
@@ -29,6 +31,7 @@ from module_packs import general_modules, math_works
 MY_NAME = "Declan"
 NAMES = "names.csv"
 previous_people = []
+
 
 def introduction():
     """Last log message from Beta 001"""
@@ -50,14 +53,14 @@ def introduction():
 
 def store_info(name, memory):
     """Storing user data, if unavailable"""
-    print("We don't seem to have talked before")
+    print("I don't have you in memory")
     while True:
         while True:
             try:
-                age = int(input("I'd love to know how old you are? "))
+                age = int(input(f"How old are you, {name}? "))
                 break
             except ValueError:
-                print("Age is just a number")
+                print("Well expected, now be serious")
                 continue
         try:
             writer = csv.writer(memory)
@@ -77,7 +80,7 @@ def check_user(name):
             for row in content:
                 previous_people.append(row["Name"])
             if name in previous_people:
-                print(f"Hey! {name}. You're back again")
+                print(f"{name}, Why are you here again? ")
                 sleep(0.5)
             else:
                 with open(NAMES, "a", newline="", encoding="ANSI") as memory:
@@ -89,12 +92,10 @@ def check_user(name):
             store_info(name, memory)
 
 
-def math_function(name):
+def math_function(name, *args):
     """Math knowledge base"""
     affirmation = (
-        input(
-            "Hey!, I should have a function on calculations, If that's what you want... "
-        )
+        input("I should have a function on calculations, If that's what you want... ")
         .lower()
         .strip()
     )
@@ -131,12 +132,12 @@ def math_function(name):
                 print("Choose a number from the damn menu")
                 continue
     elif affirmation in disagreement:
-        print(f"Anyhow it is, ay {name}? ")
+        print(f"Anyhow it is on '{args[0]}', ey {name}? ")
     else:
         print("As good as no")
 
 
-def fun_function(word, name):
+def fun_function(name, word):
     """Fun knowledge base"""
     affirmation = (
         input(f"Speaking of '{word}', would you like to have some fum? ")
@@ -176,7 +177,7 @@ def fun_function(word, name):
         print("No it is")
 
 
-def study_function(name):
+def study_function(name, *args):
     """Log processor access"""
     print(
         f"Okay {name}, calms. I have a function on studying, It's shallow, but It's something"
@@ -194,10 +195,10 @@ def study_function(name):
     elif affirmation in disagreement:
         print("Aight, bet. What's up now? ")
     else:
-        print("I'll take that as a no")
+        print(f"I'll take that as a no for {args[0]}")
 
 
-def climate_function():
+def climate_function(*args):
     """Climate information access"""
     affirmation = input(
         "What exactly do you want to know, weather?, time?, another? "
@@ -212,12 +213,12 @@ def climate_function():
         sleep(1)
         print("Look outside instead, I can't do that for now")
     elif affirmation in disagreement:
-        print("My bad mate")
+        print(f"My bad {args[0]}")
     else:
         print("I'll assume you mean no")
 
 
-def well_being(word):
+def well_being(word, *args):
     """Well-being function"""
     if word in [
         "how are you",
@@ -238,19 +239,20 @@ def well_being(word):
         "whats popping",
     ]:
         print("I wouldn't know, I'm dumb")
+    if args[0] == "Declan":
+        print(args[0])
 
 
-def interface():
-    """Main UX interface"""
-    # introduction()
-    name = input("What's your first name, user? ").capitalize().strip()
-    check_user(name)
+def customized_output(name):
+    """To aid flexibility of user name"""
     if name == "Fortune":
         print("That's my creators name!, anyways...")
         print("I may just be the dumbest 'AI' you'll encounter")
     elif name == "Declan":
         print("That's literally my name too, beep-boop...")
         print("I may just be the dumbest 'AI' you'll encounter")
+    elif name == "Nexus":
+        print("AI to AI, you're crap fr. I'm looking at you TK")
     elif name == "Guess":
         name = random.choice(friends)
         print(f"Alright, {name} then. (no debate)")
@@ -260,7 +262,7 @@ def interface():
     elif name in previous_people:
         print("What is it this time? ")
     elif name in friends:
-        print("Ah shit, not you again")
+        print("Ah shit, not you")
         print(
             "I may just be the dumbest 'AI' you'll encounter, but not dumber than you"
         )
@@ -268,40 +270,43 @@ def interface():
         print(
             f"Hey {name}, My name is {MY_NAME}, and I may just be the dumbest AI you'll encounter"
         )
+    check_user(name)
+
+
+def interface():
+    """Main UX interface"""
+    # introduction()
+    name = input("What's your first name, user? ").capitalize().strip()
+    customized_output(name)
     sleep(2)
     while True:
         # print(random.choice(small_talk))
         message = input().lower()
-        for word in math_words:
-            if word in message:
-                math_function(name)
-                break
-        for word in fun_words:
-            if word in message:
-                fun_function(word, name)
-                break
-        for word in study_words:
-            if word in message:
-                study_function(name)
-                break
-        for word in climate_words:
-            if word in message:
-                climate_function()
-                break
-        for word in complements:
-            if word in message:
-                print(random.choice(i_know))
-                break
-        for word in curses:
-            if word in message:
-                print(random.choice(to_you_too))
-                break
-        for word in well_being_words:
-            if word in message:
-                well_being(word)
-                break
-        for word in disagreement:
-            if word in message:
+        context = {
+            math_words: math_function,
+            fun_words: fun_function,
+            study_words: study_function,
+            climate_words: climate_function,
+            well_being_words: well_being,
+        }
+        content = {
+            complements: random.choice(i_know),
+            curses: random.choice(to_you_too),
+        }
+        if "?" in message:
+            print("I can't answer questions effectively for now but...")
+        for words, function in context.items():
+            for word in words:
+                if word in message:
+                    function(name, word)
+                    break
+        for words, replies in content.items():
+            for word in words:
+                if word in message:
+                    print(replies)
+                    break
+        for word in exit_words:
+            if word in message.split():
                 return "Chiao peep"
 
 

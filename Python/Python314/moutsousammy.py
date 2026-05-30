@@ -125,8 +125,6 @@ def math_function(*args):
             "Using (-b - square root of the determinant) / (2a)"
         )
         print(f"The answer is {math_works.quadratic_equation(a, b, c)}")
-    if "calculator" in args[2]:
-        print(math_works.calculate())
     affirmation = input("Do you still need help? ").lower().strip()
     if affirmation in agreement:
         print("I have some other functions to help")

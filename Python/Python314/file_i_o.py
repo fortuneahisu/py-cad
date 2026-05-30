@@ -1,6 +1,6 @@
 """Practice on file input-output, targetting json"""
 
-# import datetime
+import datetime
 import json
 import os
 import random
@@ -38,7 +38,7 @@ def create(DATABASE):
     with open(DATABASE, "w", encoding="ANSI"):
         data = {}
         print("Database initialised")
-        save_data(data, DATABASE)
+        return save_data(data, DATABASE)
 
 
 def registered(user):
@@ -52,14 +52,29 @@ def registered(user):
     return is_registered
 
 
-# datetime.date.today().strftime('%d%m%y')
+#
 def register(user):
     """Register user"""
-    identifier = f"{random.choice(project_alias)}{random.randint(0, 999999):06d}"
+    user_alias = random.choice(project_alias)
+    time_stamp = datetime.datetime.now().strftime('%d%m%y%H%M%S')
+    identifier = f"{user_alias}{time_stamp}"
     data = load_data(DATABASE)
-    data[identifier] = {"Name": user}
+    while True:
+        try:
+            user_age = int(input("Age: "))
+            break
+        except ValueError as err:
+            print(err)
+            continue
+    while True:
+        try:
+            user_height = float(input("Height: "))
+            break
+        except ValueError as err:
+            print(err)
+            continue
+    data[identifier] = {"Name": user, "Age": user_age, "Height": user_height}
     save_data(data, DATABASE)
-    get_info(user)
     if user[-1] == "s":
         grammar = ""
     else:
@@ -70,66 +85,27 @@ def register(user):
 def remove(user):
     """Deletes user by name"""
     data = load_data(DATABASE)
-    user_id = "User's identifier"
     for identifier in data:
         if data[identifier]["Name"] == user:
-            user_id = identifier
-    del data[user_id]
+            del data[identifier]
+            break
     print(f"{user} deleted")
-    save_data(data, DATABASE)
-
-
-def get_age():
-    """Get user's age"""
-    while True:
-        try:
-            user_age = int(input("Age: "))
-            break
-        except TypeError as err:
-            print(err)
-            continue
-        except ValueError as err:
-            print(err)
-    return user_age
-
-
-def get_height():
-    """Get user's height"""
-    while True:
-        try:
-            user_height = float(input("Height: "))
-            break
-        except TypeError as err:
-            print(err)
-            continue
-        except ValueError as err:
-            print(err)
-    return user_height
-
-
-def get_info(user):
-    """Amass user's information"""
-    data = load_data(DATABASE)
-    for identifier in data:
-        if data[identifier]["Name"] == user:
-            data[identifier]["Age"] = get_age()
-            data[identifier]["Height"] = get_height()
-    save_data(data, DATABASE)
+    return save_data(data, DATABASE)
 
 
 def main_menu(user):
     """Main interface menu"""
-    menu = ["Remove user"]
+    menu = ["Quit", "Remove user"]
     for idx, function in enumerate(menu):
-        print(f"{idx + 1}. {function}")
+        print(f"{idx}. {function}")
     while True:
         try:
             choice = int(input("Option: "))
+            if choice == 0:
+                return
             if choice == 1:
                 affirmation = (
-                    input(
-                        f"Are you sure you want to deleted {user} from the database? "
-                    )
+                    input(f"Are you sure you want to delete {user} from the database? ")
                     .lower()
                     .strip()
                 )

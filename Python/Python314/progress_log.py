@@ -6,10 +6,12 @@ from constants import agreement, disagreement
 from file_i_o import fix_file, load_data, save_data
 
 date = datetime.date.today()
-TIME_STAMP = str(datetime.datetime.now().strftime("%d%m%y%H%M"))
+TIME_STAMP = str(datetime.datetime.now().strftime("%d%m%y"))
 today = date.strftime("%A")
+print(today)
 LOG_FILE = "progress_log.json"
 TIME_TABLE = "time_table.json"
+STREAK = "streak.txt"
 
 
 def subject_status():
@@ -40,10 +42,10 @@ def subject_status():
 
 
 def run_daily():
-    """Make sure there's one entry per day"""
+    """Making sure there's one entry per day"""
     log_file = load_data(LOG_FILE)
     for unique_id in log_file:
-        if TIME_STAMP[0:5] == unique_id[0:5]:
+        if TIME_STAMP == unique_id:
             print("You've inputted for today, come tomorrow")
             return True
     return False
@@ -52,13 +54,16 @@ def run_daily():
 def gold_star():
     """A little something to cheer you up"""
     log_file = load_data(LOG_FILE)
+    golden = True
     for unique_id in log_file:
         if TIME_STAMP == unique_id:
             for subject_pair in log_file[TIME_STAMP][today]:
                 for subject in subject_pair:
                     if subject_pair[subject] is False:
-                        return False
-    return True
+                        golden = False
+    with open(STREAK, "a", encoding="ANSI") as streak:
+        streak.write(f"{TIME_STAMP} - {golden}\n")
+    return golden
 
 
 def progress_log():
@@ -66,14 +71,11 @@ def progress_log():
     fix_file(LOG_FILE)
     if run_daily():
         while True:
-            affirmation = input("or do you want to edit your input? ")
+            affirmation = input("or do you want to edit your input? ").lower().strip()
+            print("Your streak data will be unaffected by this edition")
             if affirmation in agreement:
                 subject_status()
-                if gold_star():
-                    print("Nice, you've had it for today")
-                    print("Don't forget tomorrow")
-                elif not gold_star():
-                    print("Awwn, tomorrow is another day mate")
+                print("Don't forget tomorrow")
                 break
             if affirmation in disagreement:
                 print("Make sure to study tomorrow")
@@ -84,7 +86,7 @@ def progress_log():
     subject_status()
     if gold_star():
         print("Hurray!, You completed today. Have a good night rest, chum")
-    elif not gold_star():
+    else:
         print("You'll get it later")
     return
 
