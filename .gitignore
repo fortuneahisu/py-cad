@@ -7,3 +7,6 @@ __pycache__/
 desktop.ini
 .trashbin/
 .preliminary
+*.csv
+*.json
+*.txt
