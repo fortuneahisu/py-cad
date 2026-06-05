@@ -17,25 +17,30 @@ from constants import (
     # complements,
     # curses,
     disagreement,
+    # small_talk,
+    exit_words,
     # friends,
     fun_words,
     # i_know,
     math_words,
-    # small_talk,
     study_words,
     # to_you_too,
     # well_being_words,
 )
+from file_i_o import fix_file, load_data, save_data
 from module_packs import (
     # basic_modules,
     general_modules,
     math_works,
 )
 
-line = []
 MY_NAME = "Moutsousammy"
+BROTHER = "Declan"
 NAMES = "names.csv"
 SUGGESTIONS = "suggestions.txt"
+MEMORY = "memory.json"
+convo_init = datetime.datetime.now().strftime("%H:%M")
+TODAY = str(datetime.datetime.now().strftime("%d/%m/%y"))
 print(f"Hi, my name is {MY_NAME}, I'll try to be engaging, but bear with me")
 sleep(0.5)
 
@@ -72,7 +77,7 @@ def check_user(name):
             for row in content:
                 previous_people.append(row["Name"])
             if name in previous_people:
-                print(f"Hey! {name}. You're back again")
+                print(f"Hurray, {name} is back")
                 sleep(0.5)
             else:
                 with open(NAMES, "a", newline="", encoding="ANSI") as memory:
@@ -82,6 +87,41 @@ def check_user(name):
             writer = csv.writer(memory)
             writer.writerow(["Name", "Age"])
             store_info(name, memory)
+
+
+def read_memory(name):
+    """Reads the siblings shared memory before continuing"""
+    memory = dict(load_data(MEMORY))
+    while True:
+        try:
+            for key in dict(memory):
+                if TODAY == key:
+                    if memory[TODAY]["last_sibling"] == BROTHER:
+                        print(
+                            f"Hope {BROTHER} wasn't a piece of work, {memory[TODAY]['last_person']}"
+                        )
+                        check_user(name)
+                        return
+                    if memory[TODAY]["last_sibling"] == MY_NAME:
+                        check_user(name)
+                        return
+                print("WHat's the damn error")
+                return
+        except KeyError:
+            print("First contact today ey?")
+            return
+
+
+def write_memory(name):
+    """Writing own metadata before closing"""
+    memory = load_data(MEMORY)
+    memory[TODAY] = {
+        "last_sibling": MY_NAME,
+        "last_person": name,
+        "convo_init": convo_init,
+        "convo_end": datetime.datetime.now().strftime("%H:%M"),
+    }
+    save_data(memory, MEMORY)
 
 
 def basic_operations(message):
@@ -103,18 +143,18 @@ def basic_operations(message):
             print(func(number_1, number_2))
 
 
-def math_function(*args):
+def math_function(name, word, message):
     """Math knowledge base"""
     while True:
         try:
-            if ("+" or "-" or "/" or "*") in args[2]:
-                basic_operations(args[2])
+            if any(op in message for op in ["+", "-", "/", "*"]):
+                basic_operations(message)
                 break
             break
         except ValueError:
             print("Operations only works on numbers, Don't you think?")
             continue
-    if "quadratic" in args[2]:
+    if "quadratic" in message:
         a, b, c = (
             int(input("Coeffiecient of x^2 (a): ")),
             int(input("Coefficient of x (b): ")),
@@ -127,7 +167,7 @@ def math_function(*args):
         print(f"The answer is {math_works.quadratic_equation(a, b, c)}")
     affirmation = input("Do you still need help? ").lower().strip()
     if affirmation in agreement:
-        print("I have some other functions to help")
+        print(f"I have some other functions to help, {name}")
         while True:
             try:
                 key = int(input("1: Factorial finder\n2: Basic calculator\n0: Quit\n"))
@@ -136,7 +176,7 @@ def math_function(*args):
                     print(f"The factorial of {number} is {math.factorial(number)}")
                     break
                 if key == 2:
-                    print("This calculator was made for Declan, sorry for the UX")
+                    print(f"This calculator was made for {BROTHER}, sorry for the UX")
                     print(math_works.calculate())
                     break
                 if key == 0:
@@ -154,7 +194,7 @@ def math_function(*args):
         print("Great, glad I helped")
     else:
         print("Sorry, I didn't get that")
-        print(f"I didn't use {args[0]}")
+        print(f"Command triggered by: {word}")
 
 
 def fun_function(name, *args):
@@ -256,7 +296,8 @@ def main_interface():
     """Main interactive front"""
     name = input("What's your first name user? ").strip().capitalize()
     libraries = {}
-    check_user(name)
+    fix_file(MEMORY)
+    read_memory(name)
     for words in climate_words:
         libraries[words] = datetime_function
     for words in math_words:
@@ -274,11 +315,12 @@ def main_interface():
                 break
         should_quit = False
         for word in message:
-            if word in disagreement:
+            if word in exit_words:
                 print("Catch you later, love")
                 should_quit = True
                 break
         if should_quit:
+            write_memory(name)
             break
 
 

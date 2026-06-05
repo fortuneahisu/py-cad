@@ -9,7 +9,7 @@ import os
 import random
 from time import sleep
 
-import progress_log
+import progress_log as progress_log
 from constants import (
     agreement,
     climate_words,
@@ -26,11 +26,16 @@ from constants import (
     to_you_too,
     well_being_words,
 )
+from file_i_o import fix_file, load_data, save_data
 from module_packs import general_modules, math_works
 
 MY_NAME = "Declan"
+SISTER = "Moutsousammy"
 NAMES = "names.csv"
-previous_people = []
+MEMORY = "memory.json"
+convo_init = datetime.datetime.now().strftime("%H:%M")
+TODAY = str(datetime.datetime.now().strftime("%d/%m/%y"))
+# id = str(datetime.datetime.now().strftime("%d/%m/%y %H:%M"))
 
 
 def introduction():
@@ -74,22 +79,59 @@ def store_info(name, memory):
 def check_user(name):
     """Checking if user data is stored"""
     content = "Content from names.json"
+    previous_people = []
     if os.path.exists(NAMES):
         with open(NAMES, "r", encoding="ANSI") as memory:
             content = csv.DictReader(memory)
             for row in content:
                 previous_people.append(row["Name"])
             if name in previous_people:
-                print(f"{name}, Why are you here again? ")
-                sleep(0.5)
+                customized_output(name, previous_people)
             else:
                 with open(NAMES, "a", newline="", encoding="ANSI") as memory:
                     store_info(name, memory)
+                customized_output(name, previous_people)
     else:
         with open(NAMES, "w", newline="", encoding="ANSI") as memory:
             writer = csv.writer(memory)
             writer.writerow(["Name", "Age"])
             store_info(name, memory)
+
+
+def read_memory(name):
+    """Reads the siblings shared memory before continuing"""
+    memory = dict(load_data(MEMORY))
+    print(f"Hey {name}")
+    while True:
+        try:
+            for key in dict(memory):
+                if TODAY == key:
+                    if memory[TODAY]["last_sibling"] == SISTER:
+                        print(
+                            f"I see you been positive with {SISTER} aight, {memory[TODAY]['last_person']}?"
+                        )
+                        check_user(name)
+                        return
+                    if memory[TODAY]["last_sibling"] == MY_NAME:
+                        check_user(name)
+                        return
+            print("What's the damn error")
+            return
+        except KeyError:
+            print("First contact today ey?")
+            return
+
+
+def write_memory(name):
+    """Wrting own metadata before closing"""
+    memory = load_data(MEMORY)
+    memory[TODAY] = {
+        "last_sibling": MY_NAME,
+        "last_person": name,
+        "convo_init": convo_init,
+        "convo_end": datetime.datetime.now().strftime("%H:%M"),
+    }
+    save_data(memory, MEMORY)
 
 
 def math_function(name, *args):
@@ -243,13 +285,13 @@ def well_being(word, *args):
         print(args[0])
 
 
-def customized_output(name):
+def customized_output(name, previous_people):
     """To aid flexibility of user name"""
     if name == "Fortune":
-        print("That's my creators name!, anyways...")
+        print("Hold up?, That's my creators name!, anyways...")
         print("I may just be the dumbest 'AI' you'll encounter")
     elif name == "Declan":
-        print("That's literally my name too, beep-boop...")
+        print("Wait a minute?, That's literally my name too, beep-boop...")
         print("I may just be the dumbest 'AI' you'll encounter")
     elif name == "Nexus":
         print("AI to AI, you're crap fr. I'm looking at you TK")
@@ -270,14 +312,14 @@ def customized_output(name):
         print(
             f"Hey {name}, My name is {MY_NAME}, and I may just be the dumbest AI you'll encounter"
         )
-    check_user(name)
 
 
 def interface():
     """Main UX interface"""
     # introduction()
     name = input("What's your first name, user? ").capitalize().strip()
-    customized_output(name)
+    fix_file(MEMORY)
+    read_memory(name)
     sleep(2)
     while True:
         # print(random.choice(small_talk))
@@ -307,6 +349,7 @@ def interface():
                     break
         for word in exit_words:
             if word in message.split():
+                write_memory(name)
                 return "Chiao peep"
 
 
