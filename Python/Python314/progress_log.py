@@ -8,7 +8,6 @@ from file_i_o import fix_file, load_data, save_data
 date = datetime.date.today()
 TIME_STAMP = str(datetime.datetime.now().strftime("%d%m%y"))
 today = date.strftime("%A")
-print(today)
 LOG_FILE = "progress_log.json"
 TIME_TABLE = "time_table.json"
 STREAK = "streak.txt"
@@ -72,8 +71,8 @@ def progress_log():
     if run_daily():
         while True:
             affirmation = input("or do you want to edit your input? ").lower().strip()
-            print("Your streak data will be unaffected by this edition")
             if affirmation in agreement:
+                print("Your streak data will be unaffected by this edition")
                 subject_status()
                 print("Don't forget tomorrow")
                 break
