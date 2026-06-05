@@ -72,6 +72,7 @@ exit_words = (
     "exit",
     "bye",
     "goodbye",
+    "nothing",
     "quit",
     "leave",
 )
