@@ -75,9 +75,8 @@ def check_user(name):
                 previous_people.append(row["Name"])
             if name in previous_people:
                 return
-            else:
-                with open(NAMES, "a", newline="", encoding="ANSI") as memory:
-                    store_info(name, memory)
+            with open(NAMES, "a", newline="", encoding="ANSI") as memory:
+                store_info(name, memory)
     else:
         with open(NAMES, "w", newline="", encoding="ANSI") as memory:
             writer = csv.writer(memory)
@@ -103,10 +102,9 @@ def read_memory(name):
                         return
                     print("What's the damn error")
                     return
-            else:
-                print("First contact")
-                check_user(name)
-                return
+            print("First contact")
+            check_user(name)
+            return
         except KeyError:
             print("First contact today ey?")
             return

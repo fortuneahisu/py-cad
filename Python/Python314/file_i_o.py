@@ -7,43 +7,42 @@ import random
 
 from constants import agreement, project_alias
 
-DATABASE = "database.json"
 
 
-def fix_file(DATABASE):
+def fix_file(database):
     """Fix corrupted files"""
-    if os.path.exists(DATABASE) and os.path.getsize(DATABASE) != 0:
+    if os.path.exists(database) and os.path.getsize(database) != 0:
         return None
-    create(DATABASE)
+    create(database)
     return None
 
 
-def load_data(DATABASE):
+def load_data(database):
     """Load database"""
-    if os.path.exists(DATABASE):
-        with open(DATABASE, "r", encoding="ANSI") as file:
-            return json.load(file)
-    else:
-        return create(DATABASE)
+    if os.path.exists(database):
+        with open(database, "r", encoding="ANSI") as file:
+            return dict(json.load(file))
+    create(database)
+    return {}
 
 
-def save_data(data, DATABASE):
+def save_data(data, database):
     """Save database"""
-    with open(DATABASE, "w", encoding="ANSI") as file:
+    with open(database, "w", encoding="ANSI") as file:
         json.dump(data, file)
 
 
-def create(DATABASE):
+def create(database):
     """Create database"""
-    with open(DATABASE, "w", encoding="ANSI"):
+    with open(database, "w", encoding="ANSI"):
         data = {}
-        print("Database initialised")
-        return save_data(data, DATABASE)
+        print("database initialised")
+        return save_data(data, database)
 
 
-def registered(user):
+def registered(user, database):
     """Check if user is registered"""
-    data = load_data(DATABASE)
+    data = load_data(database)
     is_registered = False
     for identifier in data:
         if data[identifier]["Name"] == user:
@@ -53,12 +52,12 @@ def registered(user):
 
 
 #
-def register(user):
+def register(user, database):
     """Register user"""
     user_alias = random.choice(project_alias)
     time_stamp = datetime.datetime.now().strftime('%d%m%y%H%M%S')
     identifier = f"{user_alias}{time_stamp}"
-    data = load_data(DATABASE)
+    data = load_data(database)
     while True:
         try:
             user_age = int(input("Age: "))
@@ -74,7 +73,7 @@ def register(user):
             print(err)
             continue
     data[identifier] = {"Name": user, "Age": user_age, "Height": user_height}
-    save_data(data, DATABASE)
+    save_data(data, database)
     if user[-1] == "s":
         grammar = ""
     else:
@@ -82,18 +81,18 @@ def register(user):
     print(f"{user}'{grammar} ID: {identifier}")
 
 
-def remove(user):
+def remove(user, database):
     """Deletes user by name"""
-    data = load_data(DATABASE)
+    data = load_data(database)
     for identifier in data:
         if data[identifier]["Name"] == user:
             del data[identifier]
             break
     print(f"{user} deleted")
-    return save_data(data, DATABASE)
+    return save_data(data, database)
 
 
-def main_menu(user):
+def main_menu(user, database):
     """Main interface menu"""
     menu = ["Quit", "Remove user"]
     for idx, function in enumerate(menu):
@@ -110,7 +109,7 @@ def main_menu(user):
                     .strip()
                 )
                 if affirmation in agreement:
-                    remove(user)
+                    remove(user, database)
                 else:
                     print(f"{user} remains in the database")
             else:
@@ -127,17 +126,18 @@ def main_menu(user):
 
 def auth_system():
     """Central authorisation system"""
-    fix_file(DATABASE)
+    database = "database.json"
+    fix_file(database)
     user = input("And you are? ").capitalize().strip()
-    if registered(user):
+    if registered(user, database):
         print(f"{user} is already tracked")
     else:
         print(f"{user} is not tracked")
         print("Registering...")
-        register(user)
+        register(user, database)
         print(f"'{user}' is now tracked")
     print("Main Menu")
-    main_menu(user)
+    main_menu(user, database)
 
 
 if __name__ == "__main__":

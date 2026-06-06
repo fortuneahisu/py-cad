@@ -100,25 +100,25 @@ def check_user(name):
 
 def read_memory(name):
     """Reads the siblings shared memory before continuing"""
-    memory = dict(load_data(MEMORY))
+    memory = load_data(MEMORY)
     print(f"Hey {name}")
     while True:
         try:
-            for key in dict(memory):
+            for key in memory:
                 if TODAY == key:
                     if memory[TODAY]["last_sibling"] == SISTER:
                         print(
-                            f"I see you been positive with {SISTER} aight, {memory[TODAY]['last_person']}?"
+                            "I see you've been positive with {SISTER}. "
+                             f"Aight, {memory[TODAY]['last_person']}?"
                         )
                         check_user(name)
                         return
                     if memory[TODAY]["last_sibling"] == MY_NAME:
                         check_user(name)
                     return
-            else:
-                print("First contact")
-                check_user(name)
-                return
+            print("First contact")
+            check_user(name)
+            return
         except KeyError:
             print("First contact today ey?")
             return
