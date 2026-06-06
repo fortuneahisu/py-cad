@@ -114,9 +114,11 @@ def read_memory(name):
                         return
                     if memory[TODAY]["last_sibling"] == MY_NAME:
                         check_user(name)
-                        return
-            print("What's the damn error")
-            return
+                    return
+            else:
+                print("First contact")
+                check_user(name)
+                return
         except KeyError:
             print("First contact today ey?")
             return

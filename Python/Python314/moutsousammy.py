@@ -42,9 +42,6 @@ MEMORY = "memory.json"
 convo_init = datetime.datetime.now().strftime("%H:%M")
 TODAY = str(datetime.datetime.now().strftime("%d/%m/%y"))
 print(f"Hi, my name is {MY_NAME}, I'll try to be engaging, but bear with me")
-sleep(0.5)
-
-
 previous_people = []
 
 
@@ -77,8 +74,7 @@ def check_user(name):
             for row in content:
                 previous_people.append(row["Name"])
             if name in previous_people:
-                print(f"Hurray, {name} is back")
-                sleep(0.5)
+                return
             else:
                 with open(NAMES, "a", newline="", encoding="ANSI") as memory:
                     store_info(name, memory)
@@ -105,7 +101,11 @@ def read_memory(name):
                     if memory[TODAY]["last_sibling"] == MY_NAME:
                         check_user(name)
                         return
-                print("WHat's the damn error")
+                    print("What's the damn error")
+                    return
+            else:
+                print("First contact")
+                check_user(name)
                 return
         except KeyError:
             print("First contact today ey?")
