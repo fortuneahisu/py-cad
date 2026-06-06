@@ -3,23 +3,33 @@
 
 def and_filter(message):
     "Targets only and"
-    message = message.split(" and ")
+    message = message.split()
     output = []
-    for sentence in message:
-        sentence = sentence.strip()
-        output.append(sentence)
+    for items in message:
+        items = items.strip()
+        output.append(items)
+    try:
+        output.remove("and")
+    except ValueError as err:
+        print(err)
     return output
 
 
 def negator(message):
     """Targetting negators"""
-    negators = ["not", "un", "don't", "won't"]
-    not_output = []
-    for grammar in negators:
-        not_filter = message.split(grammar)
-        for standalone in not_filter:
-            not_output.append(standalone.strip())
-        return not_output
+    if isinstance(message, str) is not list:
+        message = message.split()
+    output = []
+    for items in message:
+        items = items.strip()
+        output.append(items)
+    try:
+        output.remove("not")
+        output.remove("don't")
+        output.remove("won't")
+    except ValueError as err:
+        print(err)
+    return output
 
 
 def pass_input():
@@ -29,7 +39,6 @@ def pass_input():
     print(negator(conjunc_sect))
 
 
-print(and_filter("hkjj"
-))
-# for line in init_output:
-#     print(negator(line))
+item = and_filter('Oba, Me and TK fucked around until "and" ' \
+'literally died, not . This was all a lie, not the truth')
+print(negator(item))
