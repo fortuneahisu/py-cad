@@ -3,12 +3,11 @@ Miniature Preliminary AI model
 Beta 002a
 """
 
-import csv
 import datetime
-import os
 import random
 from time import sleep
 
+import motion_simulator
 import progress_log as progress_log
 from constants import (
     agreement,
@@ -26,16 +25,12 @@ from constants import (
     to_you_too,
     well_being_words,
 )
-from file_i_o import fix_file, load_data, save_data
+from file_i_o import fix_file, load_data, read_memory, write_memory
 from module_packs import general_modules, math_works
 
 MY_NAME = "Declan"
-SISTER = "Moutsousammy"
-NAMES = "names.csv"
-MEMORY = "memory.json"
+SIBLING = "Moutsousammy"
 convo_init = datetime.datetime.now().strftime("%H:%M")
-TODAY = str(datetime.datetime.now().strftime("%d/%m/%y"))
-# id = str(datetime.datetime.now().strftime("%d/%m/%y %H:%M"))
 
 
 def introduction():
@@ -56,86 +51,6 @@ def introduction():
     return "\n"
 
 
-def store_info(name, memory):
-    """Storing user data, if unavailable"""
-    print("I don't have you in memory")
-    while True:
-        while True:
-            try:
-                age = int(input(f"How old are you, {name}? "))
-                break
-            except ValueError:
-                print("Well expected, now be serious")
-                continue
-        try:
-            writer = csv.writer(memory)
-            writer.writerow([f"{name}", f"{age}"])
-            break
-        except ValueError as val_err:
-            print(val_err)
-            continue
-
-
-def check_user(name):
-    """Checking if user data is stored"""
-    content = "Content from names.json"
-    previous_people = []
-    if os.path.exists(NAMES):
-        with open(NAMES, "r", encoding="ANSI") as memory:
-            content = csv.DictReader(memory)
-            for row in content:
-                previous_people.append(row["Name"])
-            if name in previous_people:
-                customized_output(name, previous_people)
-            else:
-                with open(NAMES, "a", newline="", encoding="ANSI") as memory:
-                    store_info(name, memory)
-                customized_output(name, previous_people)
-    else:
-        with open(NAMES, "w", newline="", encoding="ANSI") as memory:
-            writer = csv.writer(memory)
-            writer.writerow(["Name", "Age"])
-            store_info(name, memory)
-
-
-def read_memory(name):
-    """Reads the siblings shared memory before continuing"""
-    memory = load_data(MEMORY)
-    print(f"Hey {name}")
-    while True:
-        try:
-            for key in memory:
-                if TODAY == key:
-                    if memory[TODAY]["last_sibling"] == SISTER:
-                        print(
-                            "I see you've been positive with {SISTER}. "
-                             f"Aight, {memory[TODAY]['last_person']}?"
-                        )
-                        check_user(name)
-                        return
-                    if memory[TODAY]["last_sibling"] == MY_NAME:
-                        check_user(name)
-                    return
-            print("First contact")
-            check_user(name)
-            return
-        except KeyError:
-            print("First contact today ey?")
-            return
-
-
-def write_memory(name):
-    """Wrting own metadata before closing"""
-    memory = load_data(MEMORY)
-    memory[TODAY] = {
-        "last_sibling": MY_NAME,
-        "last_person": name,
-        "convo_init": convo_init,
-        "convo_end": datetime.datetime.now().strftime("%H:%M"),
-    }
-    save_data(memory, MEMORY)
-
-
 def math_function(name, *args):
     """Math knowledge base"""
     affirmation = (
@@ -144,7 +59,6 @@ def math_function(name, *args):
         .strip()
     )
     if affirmation in agreement:
-        sleep(1)
         print("Which of 'em? ")
         while True:
             try:
@@ -197,6 +111,7 @@ def fun_function(name, word):
                         "1: Test questions\n"
                         "2: Whatsapp simulation\n"
                         "3: Rock-paper-scissors\n"
+                        "4: Motion simulator\n"
                         "0: Quit\n"
                     )
                 )
@@ -208,6 +123,9 @@ def fun_function(name, word):
                     break
                 if choice == 3:
                     general_modules.rock_paper_scissors()
+                    break
+                if choice == 4:
+                    motion_simulator.motion_simulator()
                     break
                 if choice == 0:
                     print("Suit yourself")
@@ -287,41 +205,44 @@ def well_being(word, *args):
         print(args[0])
 
 
-def customized_output(name, previous_people):
+def customized_output(name, database):
     """To aid flexibility of user name"""
+    data = load_data(database)
     if name == "Fortune":
         print("Hold up?, That's my creators name!, anyways...")
         print("I may just be the dumbest 'AI' you'll encounter")
-    elif name == "Declan":
-        print("Wait a minute?, That's literally my name too, beep-boop...")
-        print("I may just be the dumbest 'AI' you'll encounter")
     elif name == "Nexus":
-        print("AI to AI, you're crap fr. I'm looking at you TK")
+        print("AI to AI, you're poor. I'm looking at you TK")
     elif name == "Guess":
         name = random.choice(friends)
-        print(f"Alright, {name} then. (no debate)")
+        print(
+            f"You wanted me to guess, so your name should be {name} then. (no debate)"
+        )
     elif name.lower() in curses:
-        print("I doubt it, let's use our brains here shall we?")
+        print("I doubt it, but who am I to argue?")
         print(f"Anyways, we'll continue with '{name}'")
-    elif name in previous_people:
-        print("What is it this time? ")
     elif name in friends:
-        print("Ah shit, not you")
+        print("Anybody but you bro")
         print(
             "I may just be the dumbest 'AI' you'll encounter, but not dumber than you"
         )
-    else:
-        print(
-            f"Hey {name}, My name is {MY_NAME}, and I may just be the dumbest AI you'll encounter"
-        )
+    for names in data:
+        if name == names and name not in ["Fortune", friends, "Guess", "Nexus"]:
+            print(f"What is it this time, {name}?")
+            break
+    return name
 
 
 def interface():
     """Main UX interface"""
+    memory = "memory.json"
+    database = "names.json"
     # introduction()
     name = input("What's your first name, user? ").capitalize().strip()
-    fix_file(MEMORY)
-    read_memory(name)
+    name = customized_output(name, database)
+    fix_file(memory)
+    fix_file(database)
+    read_memory(name, SIBLING, MY_NAME)
     sleep(2)
     while True:
         # print(random.choice(small_talk))
@@ -338,7 +259,9 @@ def interface():
             curses: random.choice(to_you_too),
         }
         if "?" in message:
-            print("I can't answer questions effectively for now but...")
+            print("I can't answer questions effectively for now")
+            # print("Try demanding explicitly for your request")
+            # continue
         for words, function in context.items():
             for word in words:
                 if word in message:
@@ -351,7 +274,7 @@ def interface():
                     break
         for word in exit_words:
             if word in message.split():
-                write_memory(name)
+                write_memory(name, MY_NAME, convo_init)
                 return "Chiao peep"
 
 

@@ -3,10 +3,9 @@ Parallel preliminary model
 Beta 002b
 """
 
-import csv
 import datetime
 import math
-import os
+import random
 from time import sleep
 
 import motion_simulator
@@ -15,11 +14,11 @@ from constants import (
     agreement,
     climate_words,
     # complements,
-    # curses,
+    curses,
     disagreement,
     # small_talk,
     exit_words,
-    # friends,
+    friends,
     fun_words,
     # i_know,
     math_words,
@@ -27,7 +26,7 @@ from constants import (
     # to_you_too,
     # well_being_words,
 )
-from file_i_o import fix_file, load_data, save_data
+from file_i_o import fix_file, load_data, read_memory, write_memory
 from module_packs import (
     # basic_modules,
     general_modules,
@@ -35,91 +34,10 @@ from module_packs import (
 )
 
 MY_NAME = "Moutsousammy"
-BROTHER = "Declan"
-NAMES = "names.csv"
+SIBLING = "Declan"
 SUGGESTIONS = "suggestions.txt"
-MEMORY = "memory.json"
 convo_init = datetime.datetime.now().strftime("%H:%M")
-TODAY = str(datetime.datetime.now().strftime("%d/%m/%y"))
 print(f"Hi, my name is {MY_NAME}, I'll try to be engaging, but bear with me")
-previous_people = []
-
-
-def store_info(name, memory):
-    """Storing user data, if unavailable"""
-    print("We don't seem to have talked before")
-    while True:
-        while True:
-            try:
-                age = int(input("I'd love to know how old you are? "))
-                break
-            except ValueError:
-                print("Age is just a number")
-                continue
-        try:
-            writer = csv.writer(memory)
-            writer.writerow([f"{name}", f"{age}"])
-            break
-        except ValueError as val_err:
-            print(val_err)
-            continue
-
-
-def check_user(name):
-    """Checking if user data is stored"""
-    content = "Content from names.csv"
-    if os.path.exists(NAMES):
-        with open(NAMES, "r", encoding="ANSI") as memory:
-            content = csv.DictReader(memory)
-            for row in content:
-                previous_people.append(row["Name"])
-            if name in previous_people:
-                return
-            with open(NAMES, "a", newline="", encoding="ANSI") as memory:
-                store_info(name, memory)
-    else:
-        with open(NAMES, "w", newline="", encoding="ANSI") as memory:
-            writer = csv.writer(memory)
-            writer.writerow(["Name", "Age"])
-            store_info(name, memory)
-
-
-def read_memory(name):
-    """Reads the siblings shared memory before continuing"""
-    memory = dict(load_data(MEMORY))
-    while True:
-        try:
-            for key in dict(memory):
-                if TODAY == key:
-                    if memory[TODAY]["last_sibling"] == BROTHER:
-                        print(
-                            f"Hope {BROTHER} wasn't a piece of work, {memory[TODAY]['last_person']}"
-                        )
-                        check_user(name)
-                        return
-                    if memory[TODAY]["last_sibling"] == MY_NAME:
-                        check_user(name)
-                        return
-                    print("What's the damn error")
-                    return
-            print("First contact")
-            check_user(name)
-            return
-        except KeyError:
-            print("First contact today ey?")
-            return
-
-
-def write_memory(name):
-    """Writing own metadata before closing"""
-    memory = load_data(MEMORY)
-    memory[TODAY] = {
-        "last_sibling": MY_NAME,
-        "last_person": name,
-        "convo_init": convo_init,
-        "convo_end": datetime.datetime.now().strftime("%H:%M"),
-    }
-    save_data(memory, MEMORY)
 
 
 def basic_operations(message):
@@ -145,7 +63,7 @@ def math_function(name, word, message):
     """Math knowledge base"""
     while True:
         try:
-            if any(op in message for op in ["+", "-", "/", "*"]):
+            if any(op in message for op in ["+", "-", "*", "/"]):
                 basic_operations(message)
                 break
             break
@@ -174,7 +92,7 @@ def math_function(name, word, message):
                     print(f"The factorial of {number} is {math.factorial(number)}")
                     break
                 if key == 2:
-                    print(f"This calculator was made for {BROTHER}, sorry for the UX")
+                    print(f"This calculator was made for {SIBLING}, sorry for the UX")
                     print(math_works.calculate())
                     break
                 if key == 0:
@@ -188,11 +106,12 @@ def math_function(name, word, message):
             except ValueError:
                 print("Choose a number from the menu, I don't know more than those")
                 continue
+        return
     if affirmation in disagreement:
         print("Great, glad I helped")
-    else:
-        print("Sorry, I didn't get that")
-        print(f"Command triggered by: {word}")
+        return
+    print("Sorry, I didn't get that")
+    print(f"Command triggered by: {word}")
 
 
 def fun_function(name, *args):
@@ -290,26 +209,58 @@ def datetime_function(name, *args):
         break
 
 
+def customized_output(name, database):
+    """To aid flexibility of user name"""
+    data = load_data(database)
+    if name == "Fortune":
+        print("Hold up?, That's my creators name!, anyways...")
+        print("I may just be the dumbest 'AI' you'll encounter")
+    elif name == "Nexus":
+        print("AI to AI, you're poor. I'm looking at you TK")
+    elif name == "Guess":
+        name = random.choice(friends)
+        print(
+            f"You wanted me to guess, so your name should be {name} then. (no debate)"
+        )
+    elif name.lower() in curses:
+        print("I doubt it, but who am I to argue?")
+        print(f"Anyways, we'll continue with '{name}'")
+    elif name in friends:
+        print("Anybody but you bro")
+        print(
+            "I may just be the dumbest 'AI' you'll encounter, but not dumber than you"
+        )
+    for names in data:
+        if name == names and name not in ["Fortune", friends, "Guess", "Nexus"]:
+            print(f"What is it this time, {name}?")
+            break
+    return name
+
+
 def main_interface():
     """Main interactive front"""
+    memory = "memory.json"
+    database = "names.json"
     name = input("What's your first name user? ").strip().capitalize()
+    name = customized_output(name, database)
+    fix_file(memory)
+    fix_file(database)
+    read_memory(name, SIBLING, MY_NAME)
     libraries = {}
-    fix_file(MEMORY)
-    read_memory(name)
     for words in climate_words:
-        libraries[words] = datetime_function
+        libraries[words.lower()] = datetime_function
     for words in math_words:
-        libraries[words] = math_function
+        libraries[words.lower()] = math_function
     for words in study_words:
-        libraries[words] = study_function
+        libraries[words.lower()] = study_function
     for words in fun_words:
-        libraries[words] = fun_function
+        libraries[words.lower()] = fun_function
     while True:
         # print(random.choice(small_talk))
         message = input("What do you have to say? \n").split()
         for word in message:
             if word.lower() in libraries:
-                libraries[word](name, word, message)
+                libraries[word.lower()](name, word, message)
                 break
         should_quit = False
         for word in message:
@@ -318,7 +269,7 @@ def main_interface():
                 should_quit = True
                 break
         if should_quit:
-            write_memory(name)
+            write_memory(name, MY_NAME, convo_init)
             break
 
 
