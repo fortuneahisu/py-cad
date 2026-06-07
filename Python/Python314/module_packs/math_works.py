@@ -82,7 +82,13 @@ def calculate():
     """
     Calculator for +, -, *, / operations
     """
-    number_1 = float(input("number_1: "))
+    while True:
+        try:
+            number_1 = float(input("number_1: "))
+            break
+        except ValueError as err:
+            print(f"Error: {err}")
+            continue
     while True:
         try:
             operation = input("operation: ")
@@ -101,10 +107,13 @@ def calculate():
             if operation == "*":
                 number_1 = multiply(number_1, number_2)
                 continue
-        except ZeroDivisionError:
-            return "Error: Division by zero"
-        except ValueError:
-            return "Error: Invalid input"
-        except TypeError:
-            return "Error: Invalid value type"
+        except ZeroDivisionError  as err:
+            print(f"Error: {err}")
+            continue
+        except ValueError as err:
+            print(f"Error: {err}")
+            continue
+        except TypeError as err:
+            print(f"Error: {err}")
+            continue
     return number_1
