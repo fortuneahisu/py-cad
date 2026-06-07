@@ -2,3 +2,5 @@ Construct algorithms and flow chart with this empty file
 *motion_simulator
     letter 'F' = aaaaaaaaaaaaaaaaaawwwwwddddddddddddddddddwwwwwwwwwwaaaaaaaaaaaaaaaaaawwwwwaaaaaaaaaaaaaaaaaawwwwwwwwwwddddddddddddddddddwwwwwddddddddddddddddddwwwwwwwwwwaaaaaaaaaaaaaaaaaawwwwwaaaaaaaaaaaaaaaaaawwwwwwwwwwwwwwwaaaaaaaaaaaaaaaaaawwwwwwwwwwwwwwwwwwwwwwwwwaaaaaaaaaaaaaaaaaawwwwwaaaaaaaaaaaaaaaaaawwwww
     when turn_angle was pi/5
+
+# id = str(datetime.datetime.now().strftime("%d/%m/%y %H:%M"))

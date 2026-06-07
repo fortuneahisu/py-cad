@@ -5,6 +5,7 @@ Repetitive values are here
 agreement = (
     "ya",
     "true",
+    "yea",
     "done",
     "yes",
     "y",
@@ -88,6 +89,7 @@ math_words = (
     "solve",
     "calculate",
     "math",
+    "maths",
     "quadratic",
     "calculator",
     "add",
@@ -188,7 +190,7 @@ to_you_too = (
 small_talk = (
     "Okay, let's continue...",
     "Easter egg: my creator's name is Fortune",
-    "Try key words about math, study, situational stuff or games!",
+    "Try key words about math, study, situational stuff or just fun!",
     "You might notice I'm ignoring some of you messages, It's that I can't just reply",
     "Bear with me for my inabilities",
     "I'm sure it's annoying that I'm not the best",
