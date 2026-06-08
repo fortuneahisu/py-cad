@@ -39,6 +39,8 @@ def pass_input():
     print(negator(conjunc_sect))
 
 
-item = and_filter('Oba, Me and TK fucked around until "and" ' \
-'literally died, not . This was all a lie, not the truth')
+item = and_filter(
+    'Oba, Me and TK fucked around until "and" '
+    "literally died, not . This was all a lie, not the truth"
+)
 print(negator(item))
