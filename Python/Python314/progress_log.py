@@ -3,14 +3,14 @@
 import datetime
 
 from constants import agreement, disagreement
-from file_i_o import fix_file, load_data, save_data
+from file_i_o import create, fix_file, load_data, save_data
 
 date = datetime.date.today()
 TIME_STAMP = str(datetime.datetime.now().strftime("%d%m%y"))
 today = date.strftime("%A")
 LOG_FILE = "progress_log.json"
 TIME_TABLE = "time_table.json"
-STREAK = "streak.txt"
+STREAK = "streak.json"
 
 
 def subject_status():
@@ -60,14 +60,61 @@ def gold_star():
                 for subject in subject_pair:
                     if subject_pair[subject] is False:
                         golden = False
-    with open(STREAK, "a", encoding="ANSI") as streak:
-        streak.write(f"{TIME_STAMP} - {golden}\n")
+    streak = load_data(STREAK)
+    streak[TIME_STAMP] = golden
+    save_data(streak, STREAK)
     return golden
+
+
+def streak_count():
+    """The streak counter"""
+    streak = load_data(STREAK)
+    consecutive_count = 0
+    for key in streak:
+        if streak[key] is True:
+            consecutive_count += 1
+        elif streak[key] is False:
+            consecutive_count = 0
+    if consecutive_count == 0:
+        print("Keep studying and your streak count will continue to grow")
+    elif consecutive_count == 1:
+        print("Nice, now keep pushing")
+    elif consecutive_count == 7:
+        print("A week of dedication, you're on fire")
+    elif consecutive_count == 30:
+        print("One month of focus, congrats on this one")
+    elif consecutive_count == 90:
+        print("Impressive, I don't think you need me anymore")
+        print("But feel free to keep recording your progress")
+    elif consecutive_count == 365:
+        print("One year of straight bars, I'm officially rendered useless")
+    else:
+        print(f"{consecutive_count} times in a row, keep it up")
+
+
+def sync_log_streak():
+    log = load_data(LOG_FILE)
+    streak = load_data(STREAK)
+    log_keys = []
+    streak_keys = []
+    for key in log:
+        log_keys.append(key)
+    for key in streak:
+        streak_keys.append(key)
+    if log_keys == streak_keys:
+        return
+    else:
+        print("Falsification detected")
+        print("Re-initialising streak data and log data...")
+        create(LOG_FILE)
+        create(STREAK)
 
 
 def progress_log():
     """Main UX interface"""
     fix_file(LOG_FILE)
+    fix_file(STREAK)
+    sync_log_streak()
     if run_daily():
         while True:
             affirmation = input("or do you want to edit your input? ").lower().strip()
@@ -85,6 +132,7 @@ def progress_log():
     subject_status()
     if gold_star():
         print("Hurray!, You completed today. Have a good night rest, chum")
+        streak_count()
     else:
         print("You'll get it later")
     return
