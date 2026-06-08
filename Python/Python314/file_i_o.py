@@ -40,7 +40,7 @@ def create(database):
     """Create database"""
     with open(database, "w", encoding="ANSI"):
         data = {}
-        print("database initialised")
+        print(f"{database} initialised")
         return save_data(data, database)
 
 
@@ -102,6 +102,9 @@ def store_info(name, database):
     while True:
         try:
             age = int(input(f"How old are you, {name}? "))
+            if 0 > age or age >= 120:
+                print("As hard it may seem, let's maintain civility")
+                continue
             break
         except ValueError:
             print(
@@ -136,9 +139,11 @@ def read_memory(name, sibling, my_name):
                     and memory[today]["last_person"] == name
                 ):
                     print(f"Hope {sibling} wasn't a piece of work")
+                    check_user(name, database)
                     return
                 if memory[today]["last_sibling"] == sibling:
                     print("Shesh, My turn")
+                    check_user(name, database)
                     return
                 if memory[today]["last_sibling"] == my_name:
                     print("I'm back, again")
