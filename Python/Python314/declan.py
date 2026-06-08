@@ -237,11 +237,11 @@ def interface():
     """Main UX interface"""
     memory = "memory.json"
     database = "names.json"
+    fix_file(memory)
+    fix_file(database)
     # introduction()
     name = input("What's your first name, user? ").capitalize().strip()
     name = customized_output(name, database)
-    fix_file(memory)
-    fix_file(database)
     read_memory(name, SIBLING, MY_NAME)
     sleep(2)
     while True:

@@ -241,10 +241,10 @@ def main_interface():
     """Main interactive front"""
     memory = "memory.json"
     database = "names.json"
-    name = input("What's your first name user? ").strip().capitalize()
-    name = customized_output(name, database)
     fix_file(memory)
     fix_file(database)
+    name = input("What's your first name user? ").strip().capitalize()
+    name = customized_output(name, database)
     read_memory(name, SIBLING, MY_NAME)
     libraries = {}
     for words in climate_words:
