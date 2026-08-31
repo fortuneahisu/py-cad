@@ -8,7 +8,7 @@ import random
 from time import sleep
 
 import motion_simulator
-import progress_log as progress_log
+import progress_log
 from constants import (
     agreement,
     climate_words,
