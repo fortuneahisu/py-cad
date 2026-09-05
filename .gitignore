@@ -1,13 +1,28 @@
+# Editor & IDE Configs
 .vscode/
 .zed/
+desktop.ini
+
+# Python Caches & Virtual Envs
 __pycache__/
-*.exe
 *.pyc
 .venv/
-desktop.ini
+
+# Build & Executable Files
+*.exe
+
+# FreeCAD Backup Files
+*.FCBak
+*.FCBAK
+
+# System Trash & Temporary Notes
 .trashbin/
 .preliminary
+
+# Local Data Files (JSON, CSV, TXT)
 *.csv
 *.json
 *.txt
+
+# Ignore Gitignore itself if desired (optional)
 .gitignore
