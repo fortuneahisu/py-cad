@@ -8,7 +8,7 @@ import random
 import time
 from random import randint
 
-from module_packs import basic_modules
+import basic_modules
 
 def test_questions():
     """
@@ -209,6 +209,7 @@ def gameplay(name):
 
 
 def give_up(survival_rate):
+    """gameplay subfunction"""
     message = 0
     if survival_rate < 50:
         message = "so..., Anyhoo tho"
@@ -219,6 +220,7 @@ def give_up(survival_rate):
 
 
 def treat_it(survival_rate):
+    """gameplay subfunction"""
     print("You're doctor is trying to save your life...")
     time.sleep(1)
     print("Treating...")
@@ -231,6 +233,7 @@ def treat_it(survival_rate):
 
 
 def call_your_wife(name):
+    """gameplay subfunction"""
     print("Calling girlfriend...")
     time.sleep(2)
     print("She's not around, leave a typed note...")
@@ -249,6 +252,7 @@ def call_your_wife(name):
 
 
 def send_a_message(name):
+    """gameplay subfunction"""
     input("Message: ")
     print("We'll see what we can do about it")
     time.sleep(2)
