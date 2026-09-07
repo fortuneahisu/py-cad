@@ -142,7 +142,7 @@ def read_memory(name, sibling, my_name):
                     check_user(name, database)
                     return
                 if memory[today]["last_sibling"] == sibling:
-                    print("Shesh, My turn")
+                    print("Sheesh, My turn")
                     check_user(name, database)
                     return
                 if memory[today]["last_sibling"] == my_name:
