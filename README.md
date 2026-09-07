@@ -4,63 +4,91 @@ A personal learning repository for programming practice, experimentation, and sm
 
 ## Overview
 
-This repository contains a collection of scripts, exercises, prototypes, and learning materials created during software development practice. The work is intentionally varied and includes interactive Python programs, beginner-level C/C++ exercises, and front-end HTML/CSS/JavaScript experiments. It is best understood as a personal archive of learning and experimentation rather than a production application.
+This repository is a personal archive of programming exercises, learning projects, and front-end experiments. It includes Python scripts, C/C++ learning files, and HTML/CSS/JavaScript prototypes created for practice and exploration.
+
+The repository is intentionally not structured as a production application. Most content is educational, experimental, and focused on learning and iteration.
 
 ## Purpose
 
-The main purpose of this repository is to document and organize:
+The repository serves as a workspace for:
 
-- Python development exercises and mini programs
-- C and C++ language practice
-- HTML/CSS/JavaScript learning and interface prototyping
-- personal progress tracking and data files used alongside coding experiments
+- Python scripting and experimentation
+- beginner-to-intermediate C and C++ practice
+- HTML, CSS, and JavaScript UI and interface exploration
+- local project notes, practice files, and learning materials
 
 ## Repository Structure
 
 ```text
 py-cad/
+├── README.md
 ├── C_C++/
+│   ├── CMakeLists.txt
 │   ├── car_game.cpp
 │   ├── identifier_training.c
-│   ├── premier_c.c
-│   └── premier.cpp
+│   ├── premier.cpp
+│   └── premier_c.c
 ├── HTML_CSS_JS/
 │   ├── Ackerman series/
+│   │   ├── Ackerman 001.png
+│   │   ├── fvic_prototype.css
+│   │   ├── fvic_prototype.html
+│   │   └── fvic_prototype.js
 │   ├── Atematic series/
+│   │   ├── atematic_premier.css
+│   │   ├── atematic_premier.html
+│   │   └── gta_sa_entree.png
 │   ├── Diaspora series/
+│   │   ├── diaspora.css
+│   │   └── diaspora.html
 │   └── Rekindle series/
+│       ├── Ackerman 001a.png
+│       ├── central_interface.css
 │       ├── central_interface.html
+│       ├── javascript_lessons.css
 │       ├── javascript_lessons.html
+│       ├── look_into_legends.css
+│       ├── look_into_legends.html
+│       ├── personal_UX.css
 │       ├── personal_UX.html
-│       ├── server.py
-│       └── ...
+│       ├── redefinition.css
+│       ├── redefinition.html
+│       ├── space-claim_sign-up.css
+│       └── space-claim_sign-up.html
 ├── Images/
+│   └── Eqn_of_a_circle.jpeg
 ├── Python/
-│   ├── Python314/
-│   │   ├── atematic series/
-│   │   ├── diaspora series/
-│   │   ├── lesson_notes/
-│   │   ├── module_packs/
-│   │   ├── volatile series/
-│   │   ├── constants.py
-│   │   ├── declan.py
-│   │   ├── file_i_o.py
-│   │   ├── filter_input.py
-│   │   ├── motion_simulator.py
-│   │   ├── parabolic_path.py
-│   │   ├── progress_log.py
-│   │   └── ...
-│   └── Python315/
-├── constants.json
-├── custom_racism.json
-├── memory.json
-├── names.json
-├── progress_log.json
-├── streak.json
-├── suggestions.txt
-├── time_table.json
-├── .gitignore
-├── README.md
+│   └── Python314/
+│       ├── .preliminary
+│       ├── atematic series/
+│       │   ├── atematic_0_1.py
+│       │   ├── atematic_0_2.py
+│       │   └── atematic_0_3.py
+│       ├── diaspora series/
+│       │   ├── diaspora_0_1.py
+│       │   ├── diaspora_0_2.py
+│       │   └── diaspora_0_3.py
+│       ├── lesson_notes/
+│       │   ├── material_py01.txt
+│       │   └── material_py02.txt
+│       ├── module_packs/
+│       │   ├── basic_modules.py
+│       │   ├── general_modules.py
+│       │   └── math_works.py
+│       ├── volatile series/
+│       │   ├── volatile_0.py
+│       │   ├── volatile_1.py
+│       │   └── volatile_2.py
+│       ├── constants.py
+│       ├── declan.py
+│       ├── file_i_o.py
+│       ├── filter_input.py
+│       ├── motion_sim(outdated).py
+│       ├── motion_simulator.py
+│       ├── moutsousammy.py
+│       ├── parabolic_path.py
+│       ├── progress_log.py
+│       └── ...
 └── ...
 ```
 
@@ -69,8 +97,9 @@ py-cad/
 - Python 3
 - C and C++
 - HTML, CSS, and JavaScript
-- JSON for local data storage and user/progress tracking
-- WebSockets in Python for simple real-time streaming experiments
+- JSON-based local data handling for practice scripts
+- CMake for the C/C++ project structure
+- basic front-end and scripting experimentation using browser-based files
 
 ## Project Content
 
@@ -98,19 +127,19 @@ The C_C++ directory includes small beginner exercises and console programs focus
 
 ### HTML/CSS/JavaScript
 
-The HTML_CSS_JS area contains front-end prototype pages and interface experiments, including stylized layouts and JS-driven lessons or interactive examples. One Python server file in the Rekindle series also demonstrates a lightweight local WebSocket-based stream.
+The HTML_CSS_JS folder contains front-end prototype pages, styling experiments, and interface mockups. These files are primarily practice-oriented and are structured around learning exercises and design exploration.
 
 ## Setup and Usage
 
 ### Python
 
-Run a Python script from the repository root or inside the relevant subfolder:
+Run a Python script from the repository root or from the relevant subfolder:
 
 ```bash
 python Python/Python314/declan.py
 ```
 
-Some scripts may depend on sibling modules in the same project directory and may require running them from the correct folder.
+Some scripts depend on relative imports or sibling modules and may need to be run from the correct folder.
 
 ### C/C++
 
@@ -121,7 +150,7 @@ gcc C_C++/premier_c.c -o premier_c
 ./premier_c
 ```
 
-For C++:
+Compile a C++ file:
 
 ```bash
 g++ C_C++/car_game.cpp -o car_game
@@ -130,17 +159,12 @@ g++ C_C++/car_game.cpp -o car_game
 
 ### Web prototypes
 
-Open HTML files directly in a browser, or run the local Python server if a folder includes one:
-
-```bash
-python HTML_CSS_JS/Rekindle\ series/server.py
-```
+Open the HTML files directly in a browser to view the design and interaction experiments.
 
 ## Notes
 
 - This repository is an educational and personal project archive.
-- The codebase contains experimental and unfinished work, and should not be treated as production-ready software.
-- Files may depend on relative paths, local data files, or manually adjusted runtime assumptions.
+- The codebase contains experimental and unfinished work and should not be treated as production-ready software.
 
 ## License
 
