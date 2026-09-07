@@ -107,7 +107,7 @@ def calculate():
             if operation == "*":
                 number_1 = multiply(number_1, number_2)
                 continue
-        except ZeroDivisionError  as err:
+        except ZeroDivisionError as err:
             print(f"Error: {err}")
             continue
         except ValueError as err:

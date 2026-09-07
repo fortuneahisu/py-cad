@@ -4,7 +4,6 @@ Beta 002b
 """
 
 import datetime
-
 import math
 import random
 from time import sleep

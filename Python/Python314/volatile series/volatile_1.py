@@ -8,7 +8,7 @@ stem_dictionary = {
     "chatting": "talk",
     "gossip": "talk",
     "sup": "talk",
-    "vibe": "talk"
+    "vibe": "talk",
 }
 
 message = input("Speak: ").lower().split()
