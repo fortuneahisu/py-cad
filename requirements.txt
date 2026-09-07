@@ -1,0 +1,4 @@
+# Runtime dependencies for the Python learning scripts in this repository.
+# These are the only third-party libraries imported by the scripts under Python/Python314.
+numpy>=1.26,<3.0
+matplotlib>=3.8,<4.0
