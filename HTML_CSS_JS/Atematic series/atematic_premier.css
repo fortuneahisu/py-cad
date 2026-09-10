@@ -10,7 +10,22 @@ body {
     display: flex;
     flex-direction: column;
     line-height: 2;
+    background-color: rgba(240, 240, 240, 0.25);
     justify-content: space-between;
+}
+
+p {
+    border-width: 0px 0px 0px 2px;
+    border-color: black;
+    margin: 2rem;
+    text-align: justify;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+    transition: 0.25s ease-in-out;
 }
 
 #header {
@@ -32,45 +47,16 @@ body {
     top: 0px;
 }
 
-
 .aboutwork {
     border-color: rgba(50, 50, 50, 1);
-    border-bottom: 1px solid;
     border-top: 1px dashed;
-    background-color: rgba(240, 240, 240, 0.25);
-    border-bottom-left-radius: 37.5px;
-    border-bottom-right-radius: 37.5px;
     padding: 150px 10% 37.5px 10%;
-}
-
-.aboutwork ul li {
-    font-size: 12pt;
-    text-align: left;
-}
-
-p {
-    border-width: 0px 0px 0px 2px;
-    border-color: black;
-    margin: 2rem;
-}
-
-
-a {
-    color: rgba(60, 60, 60, 1);
-    text-decoration: none;
-    transition: 0.25s ease-in-out;
-}
-
-a:hover {
-    color: black;
-    font-weight: 900;
 }
 
 .navigate {
     position: fixed;
-    right: 7.5%;
-    top: 42.5px;
-    width: 177.13px;
+    right: 3.75%;
+    top: 5%;
     color: rgba(0, 0, 0, 1);
     opacity: 0.75;
     text-align: center;
@@ -80,93 +66,58 @@ a:hover {
     background-color: rgba(190, 190, 190, 0.25);
 }
 
-
 .navigateitems {
-    visibility: hidden;
-    text-align: center;
     padding: 0px;
     margin: 0px;
-    border-radius: 17.5px;
     overflow: hidden;
+    width: 33px;
     max-height: 0px;
-    opacity: 0;
     transition:
-        max-height 0.5s ease-in-out,
-        opacity 0.5s ease-in-out;
+        max-height 0.3s ease-in-out,
+        opacity 0.3s ease-in-out,
+        width 0.3s ease-in-out;
 }
 
 .navigate:hover .navigateitems {
-    max-height: 300px;
-    visibility: visible;
-    opacity: 1;
+    max-height: 400px;
+    width: 200px;
 }
 
 .navigateitems li {
-    list-style: none;
     background: rgba(230, 230, 230, 1);
-    border-radius: 17.5px;
+    border-radius: 15px;
     color: rgba(0, 0, 0, 1);
-    transition: 0.3s;
+    transition: 0.25s;
     text-align: left;
-    opacity: 1;
     border: 1px solid rgba(200, 200, 200, 0.75);
-    margin: 6.25px;
-    padding: 5px;
+    padding: 3.75px;
+    margin: 5px 0px 0px 0px;
+    text-wrap-mode: nowrap;
 }
 
 .navigateitems li:hover {
-    transform: translateX(5px);
+    transform: translateY(-2.5px);
     background: rgba(245, 245, 245, 0.875);
-    color: rgba(100, 100, 100, 1);
-    opacity: 1;
-    transition: 0.1s;
-    color: black;
-    font-weight: 900;
 }
 
 .workbreadth {
-    display: block;
-    background-color: rgba(240, 240, 240, 1);
-    text-align: center;
-    margin: 7.5%;
-    padding: 0.25rem 0.25rem 0.25rem 0.25rem;
-    border-left: 1px solid;
-    border-radius: 42.5px;
+    padding: 150px 10% 37.5px 10%;
 }
 
-
-
-
-.showroom {
-    display: block;
-    background-color: rgba(240, 240, 240, 1);
-    text-align: center;
-    margin: 7.5%;
-    padding: 0.25rem 0.25rem 0.25rem 0.25rem;
-    border-left: 1px solid;
-    border-radius: 42.5px;
+.skillpoint {
+    margin: 2rem;
 }
 
-.memory {
-    background-color: rgba(225, 225, 225, 1);
-    text-align: left;
-    border-radius: 37.5px;
-    padding: 10px 37.5px 10px 37.5px;
-    margin: 37.5px;
-    box-shadow: 1px 1px 1.5px 2px darkgrey;
+.cadimages {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
-.memory p::before {
-    content: "⇒ ";
+.cadimages img {
+    height: 300px;
 }
 
 .aboutme {
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(240, 240, 240, 1);
-    text-align: center;
-    margin: 7.5%;
-    padding: 0.25rem 0.25rem 0.25rem 2.5rem;
-    border-left: 1px solid;
-    border-radius: 42.5px;
+    padding: 150px 10% 37.5px 10%;
 }
