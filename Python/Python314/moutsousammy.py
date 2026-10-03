@@ -96,7 +96,7 @@ def math_function(name, word, message):
                     needs = input(
                         "It seems I dont have what you need\nWhat may that have been? "
                     )
-                    with open(SUGGESTIONS, "a", encoding="ANSI") as memory:
+                    with open(SUGGESTIONS, "a", encoding="UTF-8") as memory:
                         memory.write("Math needs\n")
                         memory.write(f"{needs}\n")
                         break
@@ -135,7 +135,7 @@ def fun_function(name, *args):
                 return motion_simulator.motion_simulator()
             if choice == 0:
                 needs = input(f"What would you have played instead {name}? ")
-                with open(SUGGESTIONS, "a", encoding="ANSI") as memory:
+                with open(SUGGESTIONS, "a", encoding="UTF-8") as memory:
                     memory.write("Games needs")
                     memory.write("\n")
                     memory.write(needs)
@@ -163,7 +163,7 @@ def study_function(name, *args):
     else:
         print("I didn't quite get that")
         needs = input(f"What was it that you said, {name}? ")
-        with open(SUGGESTIONS, "a", encoding="ANSI") as memory:
+        with open(SUGGESTIONS, "a", encoding="UTF-8") as memory:
             memory.write("Study needs")
             memory.write("\n")
             memory.write(needs)
@@ -195,7 +195,7 @@ def datetime_function(name, *args):
             break
         if affirmation in disagreement:
             needs = input("What did you need that I couldn't provide? ")
-            with open(SUGGESTIONS, "a", encoding="ANSI") as memory:
+            with open(SUGGESTIONS, "a", encoding="UTF-8") as memory:
                 memory.write("Date-time needs")
                 memory.write("\n")
                 memory.write(needs)

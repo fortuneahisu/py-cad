@@ -11,7 +11,7 @@ from constants import agreement, project_alias
 def fix_file(database):
     """Fix corrupted files"""
     try:
-        with open(database, "r", encoding="ANSI") as file:
+        with open(database, "r", encoding="UTF-8") as file:
             json.load(file)
     except json.JSONDecodeError:
         print(f"Warning: '{database}' was corrupted or malformed. Re-initializing...")
@@ -24,7 +24,7 @@ def fix_file(database):
 def load_data(database):
     """Load database"""
     if os.path.exists(database):
-        with open(database, "r", encoding="ANSI") as file:
+        with open(database, "r", encoding="UTF-8") as file:
             return dict(json.load(file))
     create(database)
     return {}
@@ -32,13 +32,13 @@ def load_data(database):
 
 def save_data(data, database):
     """Save database"""
-    with open(database, "w", encoding="ANSI") as file:
+    with open(database, "w", encoding="UTF-8") as file:
         json.dump(data, file)
 
 
 def create(database):
     """Create database"""
-    with open(database, "w", encoding="ANSI"):
+    with open(database, "w", encoding="UTF-8"):
         data = {}
         print(f"{database} initialised")
     return save_data(data, database)
