@@ -1,5 +1,7 @@
-"""Outdated(As of 9/5/2026)
-Motion simulator"""
+"""
+__Outdated(As of 9/5/2026)__
+Motion simulator
+"""
 
 from math import cos, pi, sin
 
