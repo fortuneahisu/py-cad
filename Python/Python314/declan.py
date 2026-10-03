@@ -7,6 +7,8 @@ import datetime
 import random
 from time import sleep
 
+import general_modules
+import math_works
 import motion_simulator
 import progress_log
 from constants import (
@@ -26,7 +28,6 @@ from constants import (
     well_being_words,
 )
 from file_i_o import fix_file, load_data, read_memory, write_memory
-from module_packs import general_modules, math_works
 
 MY_NAME = "Declan"
 SIBLING = "Moutsousammy"
