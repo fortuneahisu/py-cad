@@ -8,14 +8,21 @@ import random
 import time
 from random import randint
 
-import basic_modules
+
+def print_title(title):
+    """
+    Prints titles
+    """
+    print("_" * len(title))
+    print(title)
+    print("_" * len(title))
 
 
 def test_questions():
     """
     Test to measure my knowledge of 'for' loops
     """
-    basic_modules.print_title("Geography test")
+    print_title("Geography test")
     questions = [
         "What continent is Guadalupe found? ",
         "What country borders USA to the north? ",

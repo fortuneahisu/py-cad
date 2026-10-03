@@ -19,7 +19,7 @@ from constants import (
     friends,
     fun_words,
     i_know,
-    math_words,
+    # math_words,
     # small_talk,
     study_words,
     to_you_too,
@@ -248,7 +248,7 @@ def interface():
         # print(random.choice(small_talk))
         message = input().lower()
         context = {
-            math_words: math_function,
+            # math_words: math_function,
             fun_words: fun_function,
             study_words: study_function,
             climate_words: climate_function,

@@ -27,11 +27,7 @@ from constants import (
     # well_being_words,
 )
 from file_i_o import fix_file, load_data, read_memory, write_memory
-from module_packs import (
-    # basic_modules,
-    general_modules,
-    math_works,
-)
+from module_packs import basic_modules, general_modules, math_works
 
 MY_NAME = "Moutsousammy"
 SIBLING = "Declan"

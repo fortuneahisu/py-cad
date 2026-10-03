@@ -41,7 +41,7 @@ def create(database):
     with open(database, "w", encoding="ANSI"):
         data = {}
         print(f"{database} initialised")
-        return save_data(data, database)
+    return save_data(data, database)
 
 
 def registered(user, database):
