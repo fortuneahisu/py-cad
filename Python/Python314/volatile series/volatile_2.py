@@ -1,5 +1,6 @@
 prime_number = []
-for n in range(2, 1000):
+print("Prime numbers")
+for n in range(2, 1000000000):
     for x in range(2, n):
         if n % x == 0:
             break
