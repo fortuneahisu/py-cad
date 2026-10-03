@@ -115,9 +115,16 @@ a {
 }
 
 .cadimages img {
-    height: 300px;
+    border: 1px solid black;
+    
 }
-
+.cadimage{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
 .aboutme {
     padding: 150px 10% 37.5px 10%;
 }
