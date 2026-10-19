@@ -1,10 +1,10 @@
 # Py-Cad
 
-[![Python 3.14+](https://shields.io)](https://www.python.org/)
-[![C/C++](https://shields.io)](https://github.com/fortuneahisu/py-cad)
+[![Python 3.14+](https://shields.io)](https://python.org)
+[![C/C++](https://shields.io)](https://github.com)
 [![License](https://shields.io)](LICENSE)
 [![Code of Conduct](https://shields.io)](CODE_OF_CONDUCT.md)
-[![Open Issues](https://shields.io)](https://github.com/fortuneahisu/py-cad/issues)
+[![Open Issues](https://shields.io)](https://github.com/issues)
 [![Learning Project](https://shields.io)](README.md)
 
 A personal learning repository for programming practice, experimentation, and small exploratory projects across Python, C/C++, and web development.
