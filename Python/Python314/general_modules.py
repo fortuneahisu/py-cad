@@ -80,6 +80,10 @@ def whatsapp_init_login():
         "Verify through SMS",
         "Voice call",
     )
+    signup_options(signup_choice)
+
+def signup_options(signup_choice):
+    """Breakdown signup option"""
     while True:
         for idx, options in enumerate(signup_choice):
             print(f"{idx + 1}. {options}")
@@ -153,24 +157,22 @@ def rock_paper_scissors():
     pc_wins = 0
     your_wins = 0
     rounds = 0
+    choices = ["rock", "scissors", "paper"]
     while rounds != 10:
         user_choice = input("rock, paper, scissors: ").lower().strip()
-        choice = ["rock", "paper", "scissors"]
-        pc_choice = random.choice(choice)
-        if user_choice not in ("rock", "paper", "scissors"):
+        pc_choice = random.choice(choices)
+        if user_choice not in choices:
             print("Unrecognized input")
-        elif pc_choice == user_choice:
+            continue
+        x = choices.index(user_choice)
+        if pc_choice == user_choice:
             print("Again!, again!, again!")
-        elif (
-            ((pc_choice == "rock") and (user_choice == "scissors"))
-            or ((pc_choice == "paper") and (user_choice == "rock"))
-            or ((pc_choice == "scissors") and (user_choice == "paper"))
-        ):
-            print(f"PC wins this round, {rounds - 10} more rounds to go")
+        elif (user_choice == choices[x] and pc_choice == choices[x - 1]):
+            print(f"PC wins this round with {pc_choice}, {10 - rounds} more rounds to go")
             rounds += 1
             pc_wins += 1
         else:
-            print(f"You win this round, {rounds - 10} more rounds to go")
+            print(f"You win this round against PC's {pc_choice}, {10 - rounds} more rounds to go")
             your_wins += 1
             rounds += 1
     if pc_wins > your_wins:
@@ -294,5 +296,5 @@ def hospital_game():
         continue
 
 
-# if __name__ == "__main__":
-#     whatsapp_simulation()
+if __name__ == "__main__":
+    rock_paper_scissors()
