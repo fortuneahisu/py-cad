@@ -52,7 +52,8 @@ def motion_simulator():
                     should_quit = True
             if should_quit:
                 print(
-                    f"Ended at ({position[0]:3f}, {position[1]:3f}) facing {(angle / pi * 180) % 360:3f} degrees"
+                    f"Ended at ({position[0]:3f}, {position[1]:3f})"
+                    f"facing {(angle / pi * 180) % 360:3f} degrees"
                 )
                 break
         except ValueError as error:
