@@ -93,6 +93,7 @@ def streak_count():
 
 
 def sync_log_streak():
+    """Confirm equalization of logged streak and true streak"""
     log = load_data(LOG_FILE)
     streak = load_data(STREAK)
     log_keys = []
@@ -103,11 +104,10 @@ def sync_log_streak():
         streak_keys.append(key)
     if log_keys == streak_keys:
         return
-    else:
-        print("Falsification detected")
-        print("Re-initialising streak data and log data...")
-        create(LOG_FILE)
-        create(STREAK)
+    print("Falsification detected")
+    print("Re-initialising streak data and log data...")
+    create(LOG_FILE)
+    create(STREAK)
 
 
 def progress_log():
