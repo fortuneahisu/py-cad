@@ -6,21 +6,32 @@
 
 #include <iostream>
 #include <string>
-int main()
-{
-    std::string nameFirst;
-    std::string nameLast;
-    int age = 0;
-    std::string course;
-    int jambScore = 0;
-    std::string institution;
-    std::cin >> "What's your name? " >> nameFirst;
-    std::cout << "Hello nameLast, Input more about yourself to move on.\n"
-              << std::endl;
-    std::cin >> "How old are you?: " >> age;
 
-    std::cin >> "Input your course: " >> course;
-    std::cin >> "Input your JAMB score: " >> jambScore;
-    std::cin >> "What institution would you prefer? " >> institution;
-    std::cout << nameFirst << ", you are " << age << "and are trying to study " << course << " with " << jambScore << " JAMB score at " << " institution" << std::endl;
+int main() {
+  std::string nameFirst;
+  std::string nameLast;
+  int age = 0;
+  std::string course;
+  int jambScore = 0;
+  std::string institution;
+
+  std::cout << "What's your first name? ";
+  std::cin >> nameFirst;
+  std::cout << "What's your last name? ";
+  std::cin >> nameLast;
+  std::cout << "Hello " << nameFirst << ' ' << nameLast
+            << ", input more about yourself to move on.\n";
+
+  std::cout << "How old are you?: ";
+  std::cin >> age;
+  std::cout << "Input your course: ";
+  std::cin >> course;
+  std::cout << "Input your JAMB score: ";
+  std::cin >> jambScore;
+  std::cout << "What institution would you prefer? ";
+  std::cin >> institution;
+
+  std::cout << nameFirst << ", you are " << age << " and are trying to study "
+            << course << " with " << jambScore << " JAMB score at "
+            << institution << std::endl;
 }
