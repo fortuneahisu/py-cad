@@ -30,7 +30,6 @@ int main() {
   std::cin >> jambScore;
   std::cout << "What institution would you prefer? ";
   std::cin >> institution;
-
   std::cout << nameFirst << ", you are " << age << " and are trying to study "
             << course << " with " << jambScore << " JAMB score at "
             << institution << std::endl;
